@@ -21,18 +21,16 @@ static bool createConnection()
        }
 
        QSqlQuery query;
-       query.exec("create table person (id int primary key, " "rivi varchar(20), paikka varchar(20)"
+       query.exec("create table person (id int primary key, "
                   "firstname varchar(20), lastname varchar(20))");
-       query.exec("insert into person values(1, 1, 101, 'Danny', 'Young')");
-       query.exec("insert into person values(2, 2,102, 'Christine', 'Holand')");
-       query.exec("insert into person values(3, 3,103, 'Lars', 'Gordon')");
-       query.exec("insert into person values(4, 4,104, 'Roberto', 'Robitaille')");
-       query.exec("insert into person values(5, 5,105, 'Maria', 'Papadopoulos')");
+       query.exec("insert into person values( 101, 'Danny', 'Young')");
+       query.exec("insert into person values(102, 'Christine', 'Holand')");
+       query.exec("insert into person values(103, 'Lars', 'Gordon')");
+       query.exec("insert into person values(104, 'Roberto', 'Robitaille')");
+       query.exec("insert into person values(105, 'Maria', 'Papadopoulos')");
 
        query.exec("create table items (id int primary key,"
                                                 "imagefile int,"
-                                                "itemtype varchar(20),"
-                                                "itemtype varchar(20),"
                                                 "itemtype varchar(20),"
                                                 "description varchar(100))");
        return true;
