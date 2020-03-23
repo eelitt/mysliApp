@@ -14,8 +14,12 @@ class addDialog : public QDialog
 public:
     explicit addDialog(QWidget *parent = 0);
     ~addDialog();
+
+    void asetaCounter(int);
+    int annaCounter() const;
+
 signals:
-    void lahetaHenkilo(QString, QString, QString);
+    void lahetaHenkilo(QString, QString, QString, QString, QString, bool);
     void lisaaTietokantaan();
 
 private slots:
@@ -25,8 +29,11 @@ private slots:
 
     void on_uurnaBox_clicked();
 
+
+
 private:
     Ui::addDialog *ui;
+    int counter = 0;
 };
 
 #endif // ADDDIALOG_H

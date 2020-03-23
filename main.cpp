@@ -8,8 +8,9 @@ int main(int argc, char *argv[])
    if(!createConnection())
         return 1;
 
-    MainWindow w("person");
+    MainWindow w("henkilot");
     w.show();
 
     return a.exec();
+
 }

@@ -36,7 +36,7 @@ signals:
 private slots:
     void submit();
     void add();
-    void aseta(QString stretu, QString strSuku, QString lohkoN);
+    void aseta(QString stretu, QString strSuku, QString lohkoN, QString riviNum, QString paikkaNum, bool arkku);
 private:
         QPushButton *lisaaIhminenButton;
         QPushButton *submitButton;

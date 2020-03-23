@@ -6,9 +6,8 @@ addDialog::addDialog(QWidget *parent) :
     ui(new Ui::addDialog)
 {
     ui->setupUi(this);
-    //default
+    //default values
     ui->arkkuBox->setChecked(true);
-
     ui->counterLaatikko->setVisible(false);
     ui->counterTeksti->setVisible(false);
 }
