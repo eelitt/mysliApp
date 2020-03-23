@@ -21,18 +21,17 @@ static bool createConnection()
        }
 
        QSqlQuery query;
-       query.exec("create table person (id int primary key, "
-                  "firstname varchar(20), lastname varchar(20))");
-       query.exec("insert into person values( 101, 'Danny', 'Young')");
-       query.exec("insert into person values(102, 'Christine', 'Holand')");
-       query.exec("insert into person values(103, 'Lars', 'Gordon')");
-       query.exec("insert into person values(104, 'Roberto', 'Robitaille')");
-       query.exec("insert into person values(105, 'Maria', 'Papadopoulos')");
+       query.exec("create table henkilot "
+                 "(id INTEGER PRIMARY KEY AUTOINCREMENT,"
+                  "rivi int," "paikka int,"
+                  "firstname varchar(20), lastname varchar(20), burialmethod varchar(20))");
+       query.exec("insert into henkilot values(101,1,1, 'Danny', 'Young', 'arkku')");
+       query.exec("insert into henkilot values(102,2,2, 'Christine', 'Holand','uurna')");
+       query.exec("insert into henkilot values(103,3,3, 'Lars', 'Gordon', 'uurna')");
+       query.exec("insert into henkilot values(104,4,4, 'Roberto', 'Robitaille','arkku')");
+       query.exec("insert into henkilot values(105,5,5, 'Maria', 'Papadopoulos','arkku')");
 
-       query.exec("create table items (id int primary key,"
-                                                "imagefile int,"
-                                                "itemtype varchar(20),"
-                                                "description varchar(100))");
+
        return true;
 }
 
