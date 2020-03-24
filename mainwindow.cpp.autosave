@@ -106,6 +106,7 @@ qDebug() << model->database();
 }
 void MainWindow::removeRow()
 {
+    
  msgBox.setText("olet poistamassa henkilöä tietokannasta.");
  msgBox.setInformativeText("Oletko Varma?");
 
