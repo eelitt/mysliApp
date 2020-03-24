@@ -50,6 +50,9 @@ private:
         QSqlTableModel *model;
         addDialog *addPtr;
         QMessageBox msgBox;
+        QHBoxLayout *mainLayout;
+        QTableView *view;
+
 
 };
 
