@@ -40,6 +40,7 @@ public:
     QLineEdit *paikkaLaatikko;
     QLabel *counterLaatikko;
     QLabel *counterTeksti;
+    QPushButton *tyhjennaNappi;
 
     void setupUi(QDialog *addDialog)
     {
@@ -67,12 +68,14 @@ public:
         lahetaNappi = new QPushButton(addDialog);
         lahetaNappi->setObjectName(QStringLiteral("lahetaNappi"));
         lahetaNappi->setGeometry(QRect(40, 250, 441, 81));
+        lahetaNappi->setTabletTracking(false);
+        lahetaNappi->setFocusPolicy(Qt::StrongFocus);
         arkkuBox = new QCheckBox(addDialog);
         arkkuBox->setObjectName(QStringLiteral("arkkuBox"));
-        arkkuBox->setGeometry(QRect(30, 190, 72, 19));
+        arkkuBox->setGeometry(QRect(50, 190, 72, 19));
         uurnaBox = new QCheckBox(addDialog);
         uurnaBox->setObjectName(QStringLiteral("uurnaBox"));
-        uurnaBox->setGeometry(QRect(90, 190, 72, 19));
+        uurnaBox->setGeometry(QRect(110, 190, 72, 19));
         riviLappu = new QLabel(addDialog);
         riviLappu->setObjectName(QStringLiteral("riviLappu"));
         riviLappu->setGeometry(QRect(270, 120, 47, 13));
@@ -91,6 +94,10 @@ public:
         counterTeksti = new QLabel(addDialog);
         counterTeksti->setObjectName(QStringLiteral("counterTeksti"));
         counterTeksti->setGeometry(QRect(420, 70, 47, 13));
+        tyhjennaNappi = new QPushButton(addDialog);
+        tyhjennaNappi->setObjectName(QStringLiteral("tyhjennaNappi"));
+        tyhjennaNappi->setGeometry(QRect(400, 150, 80, 41));
+        tyhjennaNappi->setFocusPolicy(Qt::ClickFocus);
 
         retranslateUi(addDialog);
 
@@ -110,6 +117,7 @@ public:
         paikkaLAppu->setText(QApplication::translate("addDialog", "Paikka", Q_NULLPTR));
         counterLaatikko->setText(QString());
         counterTeksti->setText(QApplication::translate("addDialog", "l\303\244hetetty", Q_NULLPTR));
+        tyhjennaNappi->setText(QApplication::translate("addDialog", "Tyhjenn\303\244", Q_NULLPTR));
     } // retranslateUi
 
 };

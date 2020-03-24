@@ -1,16 +1,25 @@
 #include "adddialog.h"
 #include "ui_adddialog.h"
 
+
 addDialog::addDialog(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::addDialog)
 {
     ui->setupUi(this);
-    //default
+    //default values
     ui->arkkuBox->setChecked(true);
-
     ui->counterLaatikko->setVisible(false);
     ui->counterTeksti->setVisible(false);
+
+    //setting acceptable inputs
+    ui->etuNimiLaatikko->setInputMask("AAAAAAAA");
+    ui->sukunimiLaatikko->setInputMask("AAAAAAAAA");
+    ui->lohkoLaatikko->setInputMask("00");
+    ui->riviLaatikko->setInputMask("00");
+    ui->paikkaLaatikko->setInputMask("00");
+
+
 }
 
 addDialog::~addDialog()
@@ -46,22 +55,25 @@ void addDialog::on_lahetaNappi_clicked()
 
     //send
     emit lahetaHenkilo(strEtu, strSuku, lohkoNum, riviNum, paikkaNum, arkku);
-    emit lisaaTietokantaan();
 
-    //counter related
+    emit lisaaTietokantaan();
+   //counter related
     counter++;
     QString laskuri = QString::number(annaCounter());
     ui->counterLaatikko->setText(laskuri);
+
     //show counter
     ui->counterTeksti->setVisible(true);
     ui->counterLaatikko->setVisible(true);
 
-    //empty fields
+    //empty fields for new entry
     ui->etuNimiLaatikko->setText("");
     ui->lohkoLaatikko->setText("");
     ui->sukunimiLaatikko->setText("");
     ui->paikkaLaatikko->setText("");
     ui->riviLaatikko->setText("");
+
+
 }
 
 void addDialog::on_arkkuBox_clicked()
@@ -76,3 +88,14 @@ void addDialog::on_uurnaBox_clicked()
 }
 
 
+
+void addDialog::on_tyhjennaNappi_clicked()
+{
+    //empty fields on click
+    ui->etuNimiLaatikko->setText("");
+    ui->lohkoLaatikko->setText("");
+    ui->sukunimiLaatikko->setText("");
+    ui->paikkaLaatikko->setText("");
+    ui->riviLaatikko->setText("");
+
+}
