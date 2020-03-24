@@ -4,12 +4,16 @@
 #include <QtSql/QSqlQuery>
 #include <QtSql/QSqlTableModel>
 #include <QtSql/QSqlError>
+#include <QMessageBox>
 
 static bool createConnection()
 {
 
-       QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE");
-       db.setDatabaseName(":memory:");
+       QSqlDatabase db = QSqlDatabase::addDatabase("QMYSQL");
+       db.setHostName("127.0.0.1");
+       db.setDatabaseName("henkilotietokanta");
+       db.setUserName("root");
+       db.setPassword("asd");
        if (!db.open()) {
            QMessageBox::critical(nullptr, QObject::tr("Cannot open database"),
                QObject::tr("Unable to establish a database connection.\n"
@@ -20,16 +24,8 @@ static bool createConnection()
            return false;
        }
 
-       QSqlQuery query;
-       query.exec("create table henkilot "
-                 "(id INTEGER PRIMARY KEY AUTOINCREMENT,"
-                  "rivi int," "paikka int,"
-                  "firstname varchar(20), lastname varchar(20), burialmethod varchar(20))");
-       query.exec("insert into henkilot values(101,1,1, 'Danny', 'Young', 'arkku')");
-       query.exec("insert into henkilot values(102,2,2, 'Christine', 'Holand','uurna')");
-       query.exec("insert into henkilot values(103,3,3, 'Lars', 'Gordon', 'uurna')");
-       query.exec("insert into henkilot values(104,4,4, 'Roberto', 'Robitaille','arkku')");
-       query.exec("insert into henkilot values(105,5,5, 'Maria', 'Papadopoulos','arkku')");
+
+
 
 
        return true;

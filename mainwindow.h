@@ -15,6 +15,7 @@
 #include <connection.h>
 #include <QtWidgets>
 #include <QString>
+#include <QDebug>
 
 
 class MainWindow : public QWidget
@@ -35,6 +36,7 @@ signals:
 
 private slots:
     void submit();
+    void removeRow();
     void add();
     void aseta(QString stretu, QString strSuku, QString lohkoN, QString riviNum, QString paikkaNum, bool arkku);
 private:
@@ -42,6 +44,7 @@ private:
         QPushButton *submitButton;
         QPushButton *revertButton;
         QPushButton *quitButton;
+        QPushButton *removeRowButton;
         QDialogButtonBox *buttonBox;
         QSqlTableModel *model;
         addDialog *addPtr;

@@ -2,6 +2,8 @@
 #define ADDDIALOG_H
 
 #include <QDialog>
+#include <QMessageBox>
+#include <QDebug>
 
 namespace Ui {
 class addDialog;
@@ -30,6 +32,8 @@ private slots:
     void on_uurnaBox_clicked();
 
 
+
+    void on_tyhjennaNappi_clicked();
 
 private:
     Ui::addDialog *ui;
