@@ -15,9 +15,9 @@ addDialog::addDialog(QWidget *parent) :
     //setting acceptable inputs
     ui->etuNimiLaatikko->setInputMask("AAAAAAAA");
     ui->sukunimiLaatikko->setInputMask("AAAAAAAAA");
-    ui->lohkoLaatikko->setInputMask("00");
-    ui->riviLaatikko->setInputMask("00");
-    ui->paikkaLaatikko->setInputMask("00");
+    ui->lohkoLaatikko->setInputMask("000");
+    ui->riviLaatikko->setInputMask("000");
+    ui->paikkaLaatikko->setInputMask("000");
 
 
 }
@@ -54,24 +54,35 @@ void addDialog::on_lahetaNappi_clicked()
     }
 
     //send
+    if(ui->etuNimiLaatikko->isModified() && ui->sukunimiLaatikko->isModified()
+            && ui->lohkoLaatikko->isModified() && ui->riviLaatikko->isModified()
+            && ui->paikkaLaatikko->isModified())
+    {
     emit lahetaHenkilo(strEtu, strSuku, lohkoNum, riviNum, paikkaNum, arkku);
-
     emit lisaaTietokantaan();
-   //counter related
-    counter++;
-    QString laskuri = QString::number(annaCounter());
-    ui->counterLaatikko->setText(laskuri);
 
-    //show counter
-    ui->counterTeksti->setVisible(true);
-    ui->counterLaatikko->setVisible(true);
+        //counter related
+         counter++;
+         QString laskuri = QString::number(annaCounter());
+         ui->counterLaatikko->setText(laskuri);
 
-    //empty fields for new entry
-    ui->etuNimiLaatikko->setText("");
-    ui->lohkoLaatikko->setText("");
-    ui->sukunimiLaatikko->setText("");
-    ui->paikkaLaatikko->setText("");
-    ui->riviLaatikko->setText("");
+         //show counter
+         ui->counterTeksti->setVisible(true);
+         ui->counterLaatikko->setVisible(true);
+
+         //empty fields for new entry
+         ui->etuNimiLaatikko->setText("");
+         ui->lohkoLaatikko->setText("");
+         ui->sukunimiLaatikko->setText("");
+         ui->paikkaLaatikko->setText("");
+         ui->riviLaatikko->setText("");
+    }
+    else{
+        QMessageBox::information(this, tr("Huomio"),tr("Kaikkia tarvittavia tietoja ei annettu."));
+    }
+
+
+
 
 
 }

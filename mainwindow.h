@@ -35,6 +35,7 @@ signals:
 
 
 private slots:
+
     void submit();
     void removeRow();
     void add();
@@ -48,6 +49,8 @@ private:
         QDialogButtonBox *buttonBox;
         QSqlTableModel *model;
         addDialog *addPtr;
+        QMessageBox msgBox;
+
 };
 
 
