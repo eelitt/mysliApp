@@ -9,6 +9,8 @@ int main(int argc, char *argv[])
         return 1;
 
     MainWindow w("henkilot");
+
+
     w.show();
 
     return a.exec();

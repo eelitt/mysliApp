@@ -5,17 +5,19 @@ MainWindow::MainWindow(const QString &tablename, QWidget *parent) :
     QWidget(parent)
 
 {
+    //mainwindow setup
+    resize(460, 350);
+    setWindowTitle(tr("Henkilötietokanta"));
 
     model = new QSqlTableModel(this);
     addPtr = new addDialog(this);
 
 
-
+    //create viewable table
     model->setTable(tablename);
     model->setEditStrategy(QSqlTableModel::OnManualSubmit);
     model->select();
 
-    //create viewable table
     model->setHeaderData(0, Qt::Horizontal, tr("Lohko"));
     model->setHeaderData(1, Qt::Horizontal, tr("Rivi"));
     model->setHeaderData(2, Qt::Horizontal, tr("Paikka"));
@@ -24,10 +26,11 @@ MainWindow::MainWindow(const QString &tablename, QWidget *parent) :
     model->setHeaderData(5, Qt::Horizontal, tr("arkku/uurna"));
 
     //show database
-    QTableView *view = new QTableView;
+    view = new QTableView;
     view->setModel(model);
     view->resizeColumnsToContents();
     view->setSortingEnabled(true);
+
 
 
     //create buttons
@@ -59,13 +62,13 @@ MainWindow::MainWindow(const QString &tablename, QWidget *parent) :
     connect(addPtr,SIGNAL(lahetaHenkilo(QString,QString,QString, QString, QString, bool)),this, SLOT(aseta(QString, QString, QString,QString, QString, bool)));
 
     //add widgets
-    QHBoxLayout *mainLayout = new QHBoxLayout;
+    mainLayout = new QHBoxLayout;
     mainLayout->addWidget(view);
     mainLayout->addWidget(buttonBox);
 
     setLayout(mainLayout);
 
-    setWindowTitle(tr("Cached Table"));
+
 
 
 
@@ -77,12 +80,13 @@ MainWindow::~MainWindow()
 
     delete model;
     delete addPtr;
-    delete buttonBox;
     delete lisaaIhminenButton;
     delete quitButton;
     delete revertButton;
     delete submitButton;
     delete removeRowButton;
+    delete mainLayout;
+
 
 
 
@@ -93,7 +97,7 @@ void MainWindow::submit()
 
 {
     //save data straight to database
-qDebug() << model->database();
+    qDebug() << model->database();
     model->database().transaction();
     if (model->submitAll()) {
         model->database().commit();
@@ -106,32 +110,33 @@ qDebug() << model->database();
 }
 void MainWindow::removeRow()
 {
- msgBox.setText("olet poistamassa henkilöä tietokannasta.");
- msgBox.setInformativeText("Oletko Varma?");
+    //removes row according to user input
+    msgBox.setText("olet poistamassa henkilöä tietokannasta.");
+    msgBox.setInformativeText("Oletko Varma?");
 
- QPushButton *yesButton = msgBox.addButton(tr("kyllä"), QMessageBox::ActionRole);
- QPushButton *backButton = msgBox.addButton(tr("takaisin"), QMessageBox::RejectRole);
-msgBox.exec();
-if(msgBox.clickedButton() == yesButton)
-{
- model->removeRow(model->select());
- model->submitAll();
-}
-else if(msgBox.clickedButton() == backButton)
-{
+    QPushButton *yesButton = msgBox.addButton(tr("kyllä"), QMessageBox::ActionRole);
+    QPushButton *backButton = msgBox.addButton(tr("takaisin"), QMessageBox::RejectRole);
+    msgBox.exec();
+    if(msgBox.clickedButton() == yesButton)
+    {
+        model->removeRow(model->select());
+        model->submitAll();
+    }
+    else if(msgBox.clickedButton() == backButton)
+    {
 
-   // connect(backButton, &QPushButton::clicked, this, &QMessageBox::close);
-}
+        // connect(backButton, &QPushButton::clicked, this, &QMessageBox::close);
+    }
 
 
- delete yesButton;
- delete backButton;
+    delete yesButton;
+    delete backButton;
 }
 
 
 void MainWindow::add()
 {
-    //show second window
+    //show second (insert)window
     addPtr->show();
 
 
@@ -139,7 +144,7 @@ void MainWindow::add()
 }
 void MainWindow::aseta(QString stretu, QString strSuku, QString lohkoN, QString riviNum, QString paikkaNum, bool arkku)
 {
-
+    //insert data to database
     int row = 0;
     model->insertRows(row, 1);
     model->setData(model->index(row, 0),lohkoN);
