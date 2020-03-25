@@ -8,6 +8,12 @@ MainWindow::MainWindow(const QString &tablename, QWidget *parent) :
     //mainwindow setup
     resize(460, 350);
     setWindowTitle(tr("Henkilötietokanta"));
+    //menu
+    menuPalkki = new QMenuBar;
+    mainMenu = new QMenu(tr("&file"), this);
+
+    menuPalkki->addMenu(mainMenu);
+
 
     model = new QSqlTableModel(this);
     addPtr = new addDialog(this);
@@ -38,7 +44,7 @@ MainWindow::MainWindow(const QString &tablename, QWidget *parent) :
     lisaaIhminenButton->setDefault(true);
     submitButton = new QPushButton(tr("tallenna muutokset"));
     lisaaIhminenButton->setDefault(true);
-    removeRowButton = new QPushButton(tr("poista henkilö"));
+    removeRowButton = new QPushButton(tr("poista"));
     revertButton = new QPushButton(tr("&revert"));
     quitButton = new QPushButton(tr("Quit"));
 
@@ -48,6 +54,11 @@ MainWindow::MainWindow(const QString &tablename, QWidget *parent) :
     buttonBox->addButton(removeRowButton, QDialogButtonBox::ActionRole);
     buttonBox->addButton(revertButton, QDialogButtonBox::ActionRole);
     buttonBox->addButton(quitButton, QDialogButtonBox::RejectRole);
+
+    QPixmap pixmap(":/resurssit/bin-icon.jpg");
+    QIcon buttonIcon(pixmap);
+    removeRowButton->setIcon(buttonIcon);
+    removeRowButton->setIconSize(pixmap.rect().size());
 
     //Mainwindow connects
     connect(lisaaIhminenButton, &QPushButton::clicked,this, &MainWindow::add);
@@ -61,14 +72,12 @@ MainWindow::MainWindow(const QString &tablename, QWidget *parent) :
     connect(addPtr, SIGNAL(lisaaTietokantaan()), this, SLOT(submit()));
     connect(addPtr,SIGNAL(lahetaHenkilo(QString,QString,QString, QString, QString, bool)),this, SLOT(aseta(QString, QString, QString,QString, QString, bool)));
 
-    //add widgets
+    //add widgets and menubar
     mainLayout = new QHBoxLayout;
+    mainLayout->setMenuBar(menuPalkki);
     mainLayout->addWidget(view);
     mainLayout->addWidget(buttonBox);
-
     setLayout(mainLayout);
-
-
 
 
 
@@ -85,10 +94,6 @@ MainWindow::~MainWindow()
     delete revertButton;
     delete submitButton;
     delete removeRowButton;
-    delete mainLayout;
-
-
-
 
 
 }
@@ -157,7 +162,7 @@ void MainWindow::add()
 void MainWindow::aseta(QString stretu, QString strSuku, QString lohkoN, QString riviNum, QString paikkaNum, bool arkku)
 {
     //insert data to database
-    int row = 0;
+    int row = model->rowCount();
     model->insertRows(row, 1);
     model->setData(model->index(row, 0),lohkoN);
 
@@ -182,6 +187,6 @@ void MainWindow::aseta(QString stretu, QString strSuku, QString lohkoN, QString 
         model->setData(model->index(row, 5), uurna);
 
     }
-    row++;
+
 
 }

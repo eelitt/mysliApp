@@ -37,4 +37,7 @@ HEADERS += \
 FORMS += \
     adddialog.ui
 
+RESOURCES += \
+    resources.qrc
+
 
