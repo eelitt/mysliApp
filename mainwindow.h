@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 
 #include <adddialog.h>
+//#include <tarkistatunnukset.h>
 #include <QMainWindow>
 #include <QtSql/QSqlDatabase>
 #include <QtSql/QSqlQuery>

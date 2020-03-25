@@ -27,15 +27,18 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
         main.cpp \
         mainwindow.cpp \
-    adddialog.cpp
+    adddialog.cpp \
+    tarkistatunnukset.cpp
 
 HEADERS += \
         mainwindow.h \
     connection.h \
-    adddialog.h
+    adddialog.h \
+    tarkistatunnukset.h
 
 FORMS += \
-    adddialog.ui
+    adddialog.ui \
+    tarkistatunnukset.ui
 
 RESOURCES += \
     resources.qrc
