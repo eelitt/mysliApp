@@ -13,75 +13,6 @@
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
-  <widget class="QLineEdit" name="etuNimiLaatikko">
-   <property name="geometry">
-    <rect>
-     <x>50</x>
-     <y>90</y>
-     <width>113</width>
-     <height>21</height>
-    </rect>
-   </property>
-  </widget>
-  <widget class="QLineEdit" name="sukunimiLaatikko">
-   <property name="geometry">
-    <rect>
-     <x>50</x>
-     <y>140</y>
-     <width>113</width>
-     <height>21</height>
-    </rect>
-   </property>
-  </widget>
-  <widget class="QLineEdit" name="lohkoLaatikko">
-   <property name="geometry">
-    <rect>
-     <x>220</x>
-     <y>90</y>
-     <width>113</width>
-     <height>21</height>
-    </rect>
-   </property>
-  </widget>
-  <widget class="QLabel" name="lohkolappu">
-   <property name="geometry">
-    <rect>
-     <x>270</x>
-     <y>60</y>
-     <width>47</width>
-     <height>13</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>lohko</string>
-   </property>
-  </widget>
-  <widget class="QLabel" name="sukunimilappu">
-   <property name="geometry">
-    <rect>
-     <x>90</x>
-     <y>120</y>
-     <width>47</width>
-     <height>13</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Sukunimi</string>
-   </property>
-  </widget>
-  <widget class="QLabel" name="etulappu">
-   <property name="geometry">
-    <rect>
-     <x>90</x>
-     <y>60</y>
-     <width>47</width>
-     <height>13</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>etunimi</string>
-   </property>
-  </widget>
   <widget class="QPushButton" name="lahetaNappi">
    <property name="geometry">
     <rect>
@@ -90,6 +21,14 @@
      <width>441</width>
      <height>81</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Tahoma</family>
+     <weight>50</weight>
+     <bold>false</bold>
+     <stylestrategy>PreferAntialias</stylestrategy>
+    </font>
    </property>
    <property name="tabletTracking">
     <bool>false</bool>
@@ -101,121 +40,250 @@
     <string>lähetä</string>
    </property>
   </widget>
-  <widget class="QCheckBox" name="arkkuBox">
+  <widget class="QWidget" name="">
    <property name="geometry">
     <rect>
-     <x>50</x>
-     <y>190</y>
-     <width>72</width>
-     <height>19</height>
+     <x>100</x>
+     <y>80</y>
+     <width>314</width>
+     <height>137</height>
     </rect>
    </property>
-   <property name="text">
-    <string>Arkku</string>
+   <property name="font">
+    <font>
+     <family>Tahoma</family>
+     <weight>50</weight>
+     <bold>false</bold>
+     <stylestrategy>PreferAntialias</stylestrategy>
+    </font>
    </property>
-  </widget>
-  <widget class="QCheckBox" name="uurnaBox">
-   <property name="geometry">
-    <rect>
-     <x>110</x>
-     <y>190</y>
-     <width>72</width>
-     <height>19</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Uurna</string>
-   </property>
-  </widget>
-  <widget class="QLabel" name="riviLappu">
-   <property name="geometry">
-    <rect>
-     <x>270</x>
-     <y>120</y>
-     <width>47</width>
-     <height>13</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Rivi</string>
-   </property>
-  </widget>
-  <widget class="QLabel" name="paikkaLAppu">
-   <property name="geometry">
-    <rect>
-     <x>260</x>
-     <y>170</y>
-     <width>47</width>
-     <height>13</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Paikka</string>
-   </property>
-  </widget>
-  <widget class="QLineEdit" name="riviLaatikko">
-   <property name="geometry">
-    <rect>
-     <x>220</x>
-     <y>140</y>
-     <width>113</width>
-     <height>21</height>
-    </rect>
-   </property>
-  </widget>
-  <widget class="QLineEdit" name="paikkaLaatikko">
-   <property name="geometry">
-    <rect>
-     <x>220</x>
-     <y>190</y>
-     <width>113</width>
-     <height>21</height>
-    </rect>
-   </property>
-  </widget>
-  <widget class="QLabel" name="counterLaatikko">
-   <property name="geometry">
-    <rect>
-     <x>390</x>
-     <y>70</y>
-     <width>31</width>
-     <height>16</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string/>
-   </property>
-  </widget>
-  <widget class="QLabel" name="counterTeksti">
-   <property name="geometry">
-    <rect>
-     <x>420</x>
-     <y>70</y>
-     <width>47</width>
-     <height>13</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>lähetetty</string>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="tyhjennaNappi">
-   <property name="geometry">
-    <rect>
-     <x>400</x>
-     <y>150</y>
-     <width>80</width>
-     <height>41</height>
-    </rect>
-   </property>
-   <property name="focusPolicy">
-    <enum>Qt::ClickFocus</enum>
-   </property>
-   <property name="text">
-    <string>Tyhjennä</string>
-   </property>
+   <layout class="QGridLayout" name="gridLayout">
+    <item row="0" column="0" colspan="2">
+     <widget class="QLabel" name="etulappu">
+      <property name="font">
+       <font>
+        <family>Tahoma</family>
+        <weight>50</weight>
+        <bold>false</bold>
+        <stylestrategy>PreferAntialias</stylestrategy>
+       </font>
+      </property>
+      <property name="text">
+       <string>etunimi</string>
+      </property>
+     </widget>
+    </item>
+    <item row="0" column="2">
+     <widget class="QLabel" name="lohkolappu">
+      <property name="font">
+       <font>
+        <family>Tahoma</family>
+        <weight>50</weight>
+        <bold>false</bold>
+        <stylestrategy>PreferAntialias</stylestrategy>
+       </font>
+      </property>
+      <property name="text">
+       <string>lohko</string>
+      </property>
+     </widget>
+    </item>
+    <item row="0" column="3">
+     <widget class="QLabel" name="counterLaatikko">
+      <property name="font">
+       <font>
+        <family>Tahoma</family>
+        <weight>50</weight>
+        <bold>false</bold>
+        <stylestrategy>PreferAntialias</stylestrategy>
+       </font>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
+    </item>
+    <item row="0" column="4">
+     <widget class="QLabel" name="counterTeksti">
+      <property name="font">
+       <font>
+        <family>Tahoma</family>
+        <weight>50</weight>
+        <bold>false</bold>
+        <stylestrategy>PreferAntialias</stylestrategy>
+       </font>
+      </property>
+      <property name="text">
+       <string>lähetetty</string>
+      </property>
+     </widget>
+    </item>
+    <item row="1" column="0" colspan="2">
+     <widget class="QLineEdit" name="etuNimiLaatikko">
+      <property name="font">
+       <font>
+        <family>Tahoma</family>
+        <weight>50</weight>
+        <bold>false</bold>
+        <stylestrategy>PreferAntialias</stylestrategy>
+       </font>
+      </property>
+     </widget>
+    </item>
+    <item row="1" column="2">
+     <widget class="QLineEdit" name="lohkoLaatikko">
+      <property name="font">
+       <font>
+        <family>Tahoma</family>
+        <weight>50</weight>
+        <bold>false</bold>
+        <stylestrategy>PreferAntialias</stylestrategy>
+       </font>
+      </property>
+     </widget>
+    </item>
+    <item row="2" column="0" colspan="2">
+     <widget class="QLabel" name="sukunimilappu">
+      <property name="font">
+       <font>
+        <family>Tahoma</family>
+        <weight>50</weight>
+        <bold>false</bold>
+        <stylestrategy>PreferAntialias</stylestrategy>
+       </font>
+      </property>
+      <property name="text">
+       <string>Sukunimi</string>
+      </property>
+     </widget>
+    </item>
+    <item row="2" column="2">
+     <widget class="QLabel" name="riviLappu">
+      <property name="font">
+       <font>
+        <family>Tahoma</family>
+        <weight>50</weight>
+        <bold>false</bold>
+        <stylestrategy>PreferAntialias</stylestrategy>
+       </font>
+      </property>
+      <property name="text">
+       <string>Rivi</string>
+      </property>
+     </widget>
+    </item>
+    <item row="3" column="0" colspan="2">
+     <widget class="QLineEdit" name="sukunimiLaatikko">
+      <property name="font">
+       <font>
+        <family>Tahoma</family>
+        <weight>50</weight>
+        <bold>false</bold>
+        <stylestrategy>PreferAntialias</stylestrategy>
+       </font>
+      </property>
+     </widget>
+    </item>
+    <item row="3" column="2">
+     <widget class="QLineEdit" name="riviLaatikko">
+      <property name="font">
+       <font>
+        <family>Tahoma</family>
+        <weight>50</weight>
+        <bold>false</bold>
+        <stylestrategy>PreferAntialias</stylestrategy>
+       </font>
+      </property>
+     </widget>
+    </item>
+    <item row="3" column="3" rowspan="2" colspan="2">
+     <widget class="QPushButton" name="tyhjennaNappi">
+      <property name="font">
+       <font>
+        <family>Tahoma</family>
+        <weight>50</weight>
+        <bold>false</bold>
+        <stylestrategy>PreferAntialias</stylestrategy>
+       </font>
+      </property>
+      <property name="focusPolicy">
+       <enum>Qt::ClickFocus</enum>
+      </property>
+      <property name="text">
+       <string>Tyhjennä</string>
+      </property>
+     </widget>
+    </item>
+    <item row="4" column="2">
+     <widget class="QLabel" name="paikkaLAppu">
+      <property name="font">
+       <font>
+        <family>Tahoma</family>
+        <weight>50</weight>
+        <bold>false</bold>
+        <stylestrategy>PreferAntialias</stylestrategy>
+       </font>
+      </property>
+      <property name="text">
+       <string>Paikka</string>
+      </property>
+     </widget>
+    </item>
+    <item row="5" column="0">
+     <widget class="QCheckBox" name="arkkuBox">
+      <property name="font">
+       <font>
+        <family>Tahoma</family>
+        <weight>50</weight>
+        <bold>false</bold>
+        <stylestrategy>PreferAntialias</stylestrategy>
+       </font>
+      </property>
+      <property name="text">
+       <string>Arkku</string>
+      </property>
+     </widget>
+    </item>
+    <item row="5" column="1">
+     <widget class="QCheckBox" name="uurnaBox">
+      <property name="font">
+       <font>
+        <family>Tahoma</family>
+        <weight>50</weight>
+        <bold>false</bold>
+        <stylestrategy>PreferAntialias</stylestrategy>
+       </font>
+      </property>
+      <property name="text">
+       <string>Uurna</string>
+      </property>
+     </widget>
+    </item>
+    <item row="5" column="2">
+     <widget class="QLineEdit" name="paikkaLaatikko">
+      <property name="font">
+       <font>
+        <family>Tahoma</family>
+        <weight>50</weight>
+        <bold>false</bold>
+        <stylestrategy>PreferAntialias</stylestrategy>
+       </font>
+      </property>
+     </widget>
+    </item>
+   </layout>
   </widget>
  </widget>
+ <tabstops>
+  <tabstop>etuNimiLaatikko</tabstop>
+  <tabstop>sukunimiLaatikko</tabstop>
+  <tabstop>lohkoLaatikko</tabstop>
+  <tabstop>riviLaatikko</tabstop>
+  <tabstop>paikkaLaatikko</tabstop>
+  <tabstop>lahetaNappi</tabstop>
+  <tabstop>uurnaBox</tabstop>
+  <tabstop>arkkuBox</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>

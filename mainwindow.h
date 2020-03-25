@@ -16,6 +16,7 @@
 #include <QtWidgets>
 #include <QString>
 #include <QDebug>
+#include <QModelIndexList>
 
 
 class MainWindow : public QWidget
