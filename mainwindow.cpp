@@ -8,6 +8,10 @@ MainWindow::MainWindow(const QString &tablename, QWidget *parent) :
     //mainwindow setup
     resize(460, 350);
     setWindowTitle(tr("Henkilötietokanta"));
+    QPixmap pixMapIcon(":/resurssit/karsamakivaakuna.jpg");
+    QIcon windowIcon(pixMapIcon);
+    setWindowIcon(windowIcon);
+
     //menu
     menuPalkki = new QMenuBar;
     mainMenu = new QMenu(tr("&file"), this);
