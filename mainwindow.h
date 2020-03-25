@@ -17,7 +17,9 @@
 #include <QString>
 #include <QDebug>
 #include <QModelIndexList>
-
+#include <QMenu>
+#include <QBoxLayout>
+#include <QmenuBar>
 
 class MainWindow : public QWidget
 {
@@ -52,7 +54,10 @@ private:
         addDialog *addPtr;
         QMessageBox msgBox;
         QHBoxLayout *mainLayout;
+        QMenuBar *menuPalkki;
         QTableView *view;
+        QMenu *mainMenu;
+
 
 
 };
