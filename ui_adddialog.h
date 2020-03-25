@@ -15,89 +15,158 @@
 #include <QtWidgets/QButtonGroup>
 #include <QtWidgets/QCheckBox>
 #include <QtWidgets/QDialog>
+#include <QtWidgets/QGridLayout>
 #include <QtWidgets/QHeaderView>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QLineEdit>
 #include <QtWidgets/QPushButton>
+#include <QtWidgets/QWidget>
 
 QT_BEGIN_NAMESPACE
 
 class Ui_addDialog
 {
 public:
-    QLineEdit *etuNimiLaatikko;
-    QLineEdit *sukunimiLaatikko;
-    QLineEdit *lohkoLaatikko;
-    QLabel *lohkolappu;
-    QLabel *sukunimilappu;
-    QLabel *etulappu;
     QPushButton *lahetaNappi;
-    QCheckBox *arkkuBox;
-    QCheckBox *uurnaBox;
-    QLabel *riviLappu;
-    QLabel *paikkaLAppu;
-    QLineEdit *riviLaatikko;
-    QLineEdit *paikkaLaatikko;
+    QWidget *widget;
+    QGridLayout *gridLayout;
+    QLabel *etulappu;
+    QLabel *lohkolappu;
     QLabel *counterLaatikko;
     QLabel *counterTeksti;
+    QLineEdit *etuNimiLaatikko;
+    QLineEdit *lohkoLaatikko;
+    QLabel *sukunimilappu;
+    QLabel *riviLappu;
+    QLineEdit *sukunimiLaatikko;
+    QLineEdit *riviLaatikko;
     QPushButton *tyhjennaNappi;
+    QLabel *paikkaLAppu;
+    QCheckBox *arkkuBox;
+    QCheckBox *uurnaBox;
+    QLineEdit *paikkaLaatikko;
 
     void setupUi(QDialog *addDialog)
     {
         if (addDialog->objectName().isEmpty())
             addDialog->setObjectName(QStringLiteral("addDialog"));
         addDialog->resize(518, 366);
-        etuNimiLaatikko = new QLineEdit(addDialog);
-        etuNimiLaatikko->setObjectName(QStringLiteral("etuNimiLaatikko"));
-        etuNimiLaatikko->setGeometry(QRect(50, 90, 113, 21));
-        sukunimiLaatikko = new QLineEdit(addDialog);
-        sukunimiLaatikko->setObjectName(QStringLiteral("sukunimiLaatikko"));
-        sukunimiLaatikko->setGeometry(QRect(50, 140, 113, 21));
-        lohkoLaatikko = new QLineEdit(addDialog);
-        lohkoLaatikko->setObjectName(QStringLiteral("lohkoLaatikko"));
-        lohkoLaatikko->setGeometry(QRect(220, 90, 113, 21));
-        lohkolappu = new QLabel(addDialog);
-        lohkolappu->setObjectName(QStringLiteral("lohkolappu"));
-        lohkolappu->setGeometry(QRect(270, 60, 47, 13));
-        sukunimilappu = new QLabel(addDialog);
-        sukunimilappu->setObjectName(QStringLiteral("sukunimilappu"));
-        sukunimilappu->setGeometry(QRect(90, 120, 47, 13));
-        etulappu = new QLabel(addDialog);
-        etulappu->setObjectName(QStringLiteral("etulappu"));
-        etulappu->setGeometry(QRect(90, 60, 47, 13));
         lahetaNappi = new QPushButton(addDialog);
         lahetaNappi->setObjectName(QStringLiteral("lahetaNappi"));
         lahetaNappi->setGeometry(QRect(40, 250, 441, 81));
+        QFont font;
+        font.setFamily(QStringLiteral("Tahoma"));
+        font.setBold(false);
+        font.setWeight(50);
+        font.setStyleStrategy(QFont::PreferAntialias);
+        lahetaNappi->setFont(font);
         lahetaNappi->setTabletTracking(false);
         lahetaNappi->setFocusPolicy(Qt::StrongFocus);
-        arkkuBox = new QCheckBox(addDialog);
-        arkkuBox->setObjectName(QStringLiteral("arkkuBox"));
-        arkkuBox->setGeometry(QRect(50, 190, 72, 19));
-        uurnaBox = new QCheckBox(addDialog);
-        uurnaBox->setObjectName(QStringLiteral("uurnaBox"));
-        uurnaBox->setGeometry(QRect(110, 190, 72, 19));
-        riviLappu = new QLabel(addDialog);
-        riviLappu->setObjectName(QStringLiteral("riviLappu"));
-        riviLappu->setGeometry(QRect(270, 120, 47, 13));
-        paikkaLAppu = new QLabel(addDialog);
-        paikkaLAppu->setObjectName(QStringLiteral("paikkaLAppu"));
-        paikkaLAppu->setGeometry(QRect(260, 170, 47, 13));
-        riviLaatikko = new QLineEdit(addDialog);
-        riviLaatikko->setObjectName(QStringLiteral("riviLaatikko"));
-        riviLaatikko->setGeometry(QRect(220, 140, 113, 21));
-        paikkaLaatikko = new QLineEdit(addDialog);
-        paikkaLaatikko->setObjectName(QStringLiteral("paikkaLaatikko"));
-        paikkaLaatikko->setGeometry(QRect(220, 190, 113, 21));
-        counterLaatikko = new QLabel(addDialog);
+        widget = new QWidget(addDialog);
+        widget->setObjectName(QStringLiteral("widget"));
+        widget->setGeometry(QRect(100, 80, 314, 137));
+        widget->setFont(font);
+        gridLayout = new QGridLayout(widget);
+        gridLayout->setObjectName(QStringLiteral("gridLayout"));
+        gridLayout->setContentsMargins(0, 0, 0, 0);
+        etulappu = new QLabel(widget);
+        etulappu->setObjectName(QStringLiteral("etulappu"));
+        etulappu->setFont(font);
+
+        gridLayout->addWidget(etulappu, 0, 0, 1, 2);
+
+        lohkolappu = new QLabel(widget);
+        lohkolappu->setObjectName(QStringLiteral("lohkolappu"));
+        lohkolappu->setFont(font);
+
+        gridLayout->addWidget(lohkolappu, 0, 2, 1, 1);
+
+        counterLaatikko = new QLabel(widget);
         counterLaatikko->setObjectName(QStringLiteral("counterLaatikko"));
-        counterLaatikko->setGeometry(QRect(390, 70, 31, 16));
-        counterTeksti = new QLabel(addDialog);
+        counterLaatikko->setFont(font);
+
+        gridLayout->addWidget(counterLaatikko, 0, 3, 1, 1);
+
+        counterTeksti = new QLabel(widget);
         counterTeksti->setObjectName(QStringLiteral("counterTeksti"));
-        counterTeksti->setGeometry(QRect(420, 70, 47, 13));
-        tyhjennaNappi = new QPushButton(addDialog);
+        counterTeksti->setFont(font);
+
+        gridLayout->addWidget(counterTeksti, 0, 4, 1, 1);
+
+        etuNimiLaatikko = new QLineEdit(widget);
+        etuNimiLaatikko->setObjectName(QStringLiteral("etuNimiLaatikko"));
+        etuNimiLaatikko->setFont(font);
+
+        gridLayout->addWidget(etuNimiLaatikko, 1, 0, 1, 2);
+
+        lohkoLaatikko = new QLineEdit(widget);
+        lohkoLaatikko->setObjectName(QStringLiteral("lohkoLaatikko"));
+        lohkoLaatikko->setFont(font);
+
+        gridLayout->addWidget(lohkoLaatikko, 1, 2, 1, 1);
+
+        sukunimilappu = new QLabel(widget);
+        sukunimilappu->setObjectName(QStringLiteral("sukunimilappu"));
+        sukunimilappu->setFont(font);
+
+        gridLayout->addWidget(sukunimilappu, 2, 0, 1, 2);
+
+        riviLappu = new QLabel(widget);
+        riviLappu->setObjectName(QStringLiteral("riviLappu"));
+        riviLappu->setFont(font);
+
+        gridLayout->addWidget(riviLappu, 2, 2, 1, 1);
+
+        sukunimiLaatikko = new QLineEdit(widget);
+        sukunimiLaatikko->setObjectName(QStringLiteral("sukunimiLaatikko"));
+        sukunimiLaatikko->setFont(font);
+
+        gridLayout->addWidget(sukunimiLaatikko, 3, 0, 1, 2);
+
+        riviLaatikko = new QLineEdit(widget);
+        riviLaatikko->setObjectName(QStringLiteral("riviLaatikko"));
+        riviLaatikko->setFont(font);
+
+        gridLayout->addWidget(riviLaatikko, 3, 2, 1, 1);
+
+        tyhjennaNappi = new QPushButton(widget);
         tyhjennaNappi->setObjectName(QStringLiteral("tyhjennaNappi"));
-        tyhjennaNappi->setGeometry(QRect(400, 150, 80, 41));
+        tyhjennaNappi->setFont(font);
         tyhjennaNappi->setFocusPolicy(Qt::ClickFocus);
+
+        gridLayout->addWidget(tyhjennaNappi, 3, 3, 2, 2);
+
+        paikkaLAppu = new QLabel(widget);
+        paikkaLAppu->setObjectName(QStringLiteral("paikkaLAppu"));
+        paikkaLAppu->setFont(font);
+
+        gridLayout->addWidget(paikkaLAppu, 4, 2, 1, 1);
+
+        arkkuBox = new QCheckBox(widget);
+        arkkuBox->setObjectName(QStringLiteral("arkkuBox"));
+        arkkuBox->setFont(font);
+
+        gridLayout->addWidget(arkkuBox, 5, 0, 1, 1);
+
+        uurnaBox = new QCheckBox(widget);
+        uurnaBox->setObjectName(QStringLiteral("uurnaBox"));
+        uurnaBox->setFont(font);
+
+        gridLayout->addWidget(uurnaBox, 5, 1, 1, 1);
+
+        paikkaLaatikko = new QLineEdit(widget);
+        paikkaLaatikko->setObjectName(QStringLiteral("paikkaLaatikko"));
+        paikkaLaatikko->setFont(font);
+
+        gridLayout->addWidget(paikkaLaatikko, 5, 2, 1, 1);
+
+        QWidget::setTabOrder(etuNimiLaatikko, sukunimiLaatikko);
+        QWidget::setTabOrder(sukunimiLaatikko, lohkoLaatikko);
+        QWidget::setTabOrder(lohkoLaatikko, riviLaatikko);
+        QWidget::setTabOrder(riviLaatikko, paikkaLaatikko);
+        QWidget::setTabOrder(paikkaLaatikko, lahetaNappi);
+        QWidget::setTabOrder(lahetaNappi, uurnaBox);
+        QWidget::setTabOrder(uurnaBox, arkkuBox);
 
         retranslateUi(addDialog);
 
@@ -107,17 +176,17 @@ public:
     void retranslateUi(QDialog *addDialog)
     {
         addDialog->setWindowTitle(QApplication::translate("addDialog", "Dialog", Q_NULLPTR));
-        lohkolappu->setText(QApplication::translate("addDialog", "lohko", Q_NULLPTR));
-        sukunimilappu->setText(QApplication::translate("addDialog", "Sukunimi", Q_NULLPTR));
-        etulappu->setText(QApplication::translate("addDialog", "etunimi", Q_NULLPTR));
         lahetaNappi->setText(QApplication::translate("addDialog", "l\303\244het\303\244", Q_NULLPTR));
-        arkkuBox->setText(QApplication::translate("addDialog", "Arkku", Q_NULLPTR));
-        uurnaBox->setText(QApplication::translate("addDialog", "Uurna", Q_NULLPTR));
-        riviLappu->setText(QApplication::translate("addDialog", "Rivi", Q_NULLPTR));
-        paikkaLAppu->setText(QApplication::translate("addDialog", "Paikka", Q_NULLPTR));
+        etulappu->setText(QApplication::translate("addDialog", "etunimi", Q_NULLPTR));
+        lohkolappu->setText(QApplication::translate("addDialog", "lohko", Q_NULLPTR));
         counterLaatikko->setText(QString());
         counterTeksti->setText(QApplication::translate("addDialog", "l\303\244hetetty", Q_NULLPTR));
+        sukunimilappu->setText(QApplication::translate("addDialog", "Sukunimi", Q_NULLPTR));
+        riviLappu->setText(QApplication::translate("addDialog", "Rivi", Q_NULLPTR));
         tyhjennaNappi->setText(QApplication::translate("addDialog", "Tyhjenn\303\244", Q_NULLPTR));
+        paikkaLAppu->setText(QApplication::translate("addDialog", "Paikka", Q_NULLPTR));
+        arkkuBox->setText(QApplication::translate("addDialog", "Arkku", Q_NULLPTR));
+        uurnaBox->setText(QApplication::translate("addDialog", "Uurna", Q_NULLPTR));
     } // retranslateUi
 
 };

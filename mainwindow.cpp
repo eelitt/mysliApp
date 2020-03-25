@@ -109,23 +109,35 @@ void MainWindow::submit()
     }
 }
 void MainWindow::removeRow()
+
 {
     //removes row according to user input
-    msgBox.setText("olet poistamassa henkilöä tietokannasta.");
-    msgBox.setInformativeText("Oletko Varma?");
+    QModelIndex index;
+    //get selected indexes
+    QModelIndexList indexes = view->selectionModel()->selectedIndexes();
+    //getting wanted row index
+    for(int i = 0; i < indexes.count(); i++)
+    {
+        index = indexes.at(i);
+
+    }
+
+    //spawning a messagebox
+    msgBox.setText("Oot poistamassa henkilöä tietokannasta.");
+    msgBox.setInformativeText("Ootko varma?");
 
     QPushButton *yesButton = msgBox.addButton(tr("kyllä"), QMessageBox::ActionRole);
     QPushButton *backButton = msgBox.addButton(tr("takaisin"), QMessageBox::RejectRole);
     msgBox.exec();
     if(msgBox.clickedButton() == yesButton)
     {
-        model->removeRow(model->select());
+        model->removeRow(index.row());
         model->submitAll();
     }
     else if(msgBox.clickedButton() == backButton)
     {
 
-        // connect(backButton, &QPushButton::clicked, this, &QMessageBox::close);
+
     }
 
 
