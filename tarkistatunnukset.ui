@@ -10,7 +10,19 @@
     <height>500</height>
    </rect>
   </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
+  </property>
   <property name="minimumSize">
+   <size>
+    <width>500</width>
+    <height>500</height>
+   </size>
+  </property>
+  <property name="maximumSize">
    <size>
     <width>500</width>
     <height>500</height>
@@ -23,13 +35,17 @@
    <iconset>
     <normaloff>resurssit/karsamakivaakuna.jpg</normaloff>resurssit/karsamakivaakuna.jpg</iconset>
   </property>
-  <widget class="QWidget" name="layoutWidget">
+  <property name="styleSheet">
+   <string notr="true">
+</string>
+  </property>
+  <widget class="QWidget" name="">
    <property name="geometry">
     <rect>
-     <x>140</x>
-     <y>120</y>
-     <width>181</width>
-     <height>81</height>
+     <x>141</x>
+     <y>121</y>
+     <width>165</width>
+     <height>92</height>
     </rect>
    </property>
    <layout class="QGridLayout" name="gridLayout">
@@ -49,8 +65,30 @@
       </property>
      </widget>
     </item>
-    <item row="2" column="1">
-     <widget class="QLineEdit" name="salasanaLaatikko"/>
+    <item row="1" column="0">
+     <widget class="QLabel" name="label_2">
+      <property name="font">
+       <font>
+        <family>Tahoma</family>
+        <pointsize>8</pointsize>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="text">
+       <string>Tunnus</string>
+      </property>
+     </widget>
+    </item>
+    <item row="1" column="1">
+     <widget class="QLineEdit" name="tunnusLaatikko">
+      <property name="styleSheet">
+       <string notr="true">QLineEdit {
+border-radius: 5px;
+}
+</string>
+      </property>
+     </widget>
     </item>
     <item row="2" column="0">
      <widget class="QLabel" name="label_3">
@@ -67,28 +105,40 @@
       </property>
      </widget>
     </item>
-    <item row="1" column="1">
-     <widget class="QLineEdit" name="tunnusLaatikko"/>
+    <item row="2" column="1">
+     <widget class="QLineEdit" name="salasanaLaatikko">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+        <horstretch>11</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QLineEdit {
+border-radius: 5px
+
+}</string>
+      </property>
+      <property name="echoMode">
+       <enum>QLineEdit::Password</enum>
+      </property>
+     </widget>
     </item>
-    <item row="1" column="0">
-     <widget class="QLabel" name="label_2">
-      <property name="font">
-       <font>
-        <family>Tahoma</family>
-        <pointsize>8</pointsize>
-        <weight>75</weight>
-        <bold>true</bold>
-       </font>
+    <item row="3" column="1">
+     <widget class="QPushButton" name="pushButton">
+      <property name="styleSheet">
+       <string notr="true">QPushButton {
+
+}
+</string>
       </property>
       <property name="text">
-       <string>Tunnus</string>
+       <string>Sisään</string>
       </property>
      </widget>
     </item>
    </layout>
   </widget>
-  <zorder>layoutWidget</zorder>
-  <zorder>label</zorder>
  </widget>
  <resources/>
  <connections/>

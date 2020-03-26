@@ -28,13 +28,15 @@ SOURCES += \
         main.cpp \
         mainwindow.cpp \
     adddialog.cpp \
-    tarkistatunnukset.cpp
+    tarkistatunnukset.cpp \
+    henkilotietokanta.cpp
 
 HEADERS += \
         mainwindow.h \
     connection.h \
     adddialog.h \
-    tarkistatunnukset.h
+    tarkistatunnukset.h \
+    henkilotietokanta.h
 
 FORMS += \
     adddialog.ui \

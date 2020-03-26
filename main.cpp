@@ -6,14 +6,18 @@ int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
 
+
+
     if(!createConnection())
+    {
         return 1;
+    }
 
-    MainWindow w("henkilot");
-    tarkistaTunnukset t;
-    t.show();
+//tarkistaTunnukset t("kayttajatable");
+//t.show();
 
-   // w.show();
+   MainWindow w;
+
 
     return a.exec();
 
