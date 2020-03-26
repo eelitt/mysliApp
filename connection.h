@@ -9,28 +9,23 @@
 static bool createConnection()
 {
 
-       QSqlDatabase db = QSqlDatabase::addDatabase("QMYSQL");
+      QSqlDatabase db = QSqlDatabase::addDatabase("QMYSQL");
+
        db.setHostName("127.0.0.1");
        db.setDatabaseName("henkilotietokanta");
        db.setUserName("root");
        db.setPassword("asd");
-       if (!db.open()) {
-           QMessageBox::critical(nullptr, QObject::tr("Cannot open database"),
-               QObject::tr("Unable to establish a database connection.\n"
-                           "This example needs SQLite support. Please read "
-                           "the Qt SQL driver documentation for information how "
-                           "to build it.\n\n"
+       bool okay = db.open();
+       qDebug() << "hei" << okay;
+       if (!okay) {
+           qDebug() << db.lastError();
+           QMessageBox::critical(nullptr, QObject::tr("Cannot open database1"),
+               QObject::tr("unable to establish a database connection.\n"
                            "Click Cancel to exit."), QMessageBox::Cancel);
            return false;
        }
-
-
-
-
-
-       return true;
+    return true;
 }
-
 
 
 
