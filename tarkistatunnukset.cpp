@@ -58,7 +58,7 @@ void tarkistaTunnukset::haeTunnukset(QString &tunnus, QString &salasana)
 
         if(tunnus == accountName)
         {
-            qDebug() << accountName;
+
             nameTest = true;
             break;
         }else
@@ -77,7 +77,7 @@ void tarkistaTunnukset::haeTunnukset(QString &tunnus, QString &salasana)
 
         if(salasana == password)
         {
-            qDebug() << password;
+
             passwordTest = true;
             break;
         }else
@@ -88,7 +88,7 @@ void tarkistaTunnukset::haeTunnukset(QString &tunnus, QString &salasana)
 
     if(nameTest == true && passwordTest == true)
     {
-      identification = true;
+        identification = true;
 
         this->close();
     }
@@ -109,7 +109,7 @@ void tarkistaTunnukset::on_pushButton_clicked()
     QString salasana = ui->salasanaLaatikko->text();
 
 
-        emit tunnusHaku(tunnus, salasana);
+    emit tunnusHaku(tunnus, salasana);
 
 
 
@@ -117,6 +117,5 @@ void tarkistaTunnukset::on_pushButton_clicked()
 bool tarkistaTunnukset::getIdentification() const
 {
     return identification;
-
 
 }

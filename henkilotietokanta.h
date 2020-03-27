@@ -20,6 +20,7 @@
 #include <QMenu>
 #include <QBoxLayout>
 #include <QmenuBar>
+#include <QSqlRecord>
 
 class henkiloTietokanta : public QWidget
 {
