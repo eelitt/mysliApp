@@ -11,27 +11,26 @@ MainWindow::MainWindow(QWidget *parent) :
 
 
     tunnusOlio->show();
-    qDebug() << tunnusOlio->getIdentification();
+
     tunnusOlio->exec();
 
 
 
-qDebug() << tunnusOlio->getIdentification();
+
 
     if(tunnusOlio->getIdentification())
     {
-    tunnusOlio->close();
-    tietokantaOlio = new henkiloTietokanta("henkilot");
-    tietokantaOlio->show();
+        tunnusOlio->close();
+        tietokantaOlio = new henkiloTietokanta("henkilot");
+        tietokantaOlio->show();
     }
-    }
+}
 
 
 
 
 MainWindow::~MainWindow()
 {
-
 
 
     delete tunnusOlio;
