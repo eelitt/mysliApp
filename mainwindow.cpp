@@ -1,5 +1,5 @@
 #include "mainwindow.h"
-#include <connection.h>
+
 
 MainWindow::MainWindow(QWidget *parent) :
     QWidget(parent)

@@ -1,12 +1,13 @@
 #ifndef CONNECTION_H
 #define CONNECTION_H
+
 #include <QtSql/QSqlDatabase>
 #include <QtSql/QSqlQuery>
 #include <QtSql/QSqlTableModel>
 #include <QtSql/QSqlError>
 #include <QMessageBox>
 
-static bool createConnection()
+static bool createConnection1()
 {
 
       QSqlDatabase db = QSqlDatabase::addDatabase("QMYSQL");
