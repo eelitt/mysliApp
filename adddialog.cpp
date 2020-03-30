@@ -7,6 +7,7 @@ addDialog::addDialog(QWidget *parent) :
     ui(new Ui::addDialog)
 {
     ui->setupUi(this);
+
     //default values
     ui->arkkuBox->setChecked(true);
     ui->counterLaatikko->setVisible(false);
@@ -53,22 +54,24 @@ void addDialog::on_lahetaNappi_clicked()
         arkku = false;
     }
 
-    //send
+    //if all wanted data is not given, msgbox is spawned
     if(ui->etuNimiLaatikko->isModified() && ui->sukunimiLaatikko->isModified()
             && ui->lohkoLaatikko->isModified() && ui->riviLaatikko->isModified()
             && ui->paikkaLaatikko->isModified())
+
     {
         emit lahetaHenkilo(strEtu, strSuku, lohkoNum, riviNum, paikkaNum, arkku);
-        emit lisaaTietokantaan();
 
-        //counter related
-        counter++;
-        QString laskuri = QString::number(annaCounter());
-        ui->counterLaatikko->setText(laskuri);
 
-        //show counter
-        ui->counterTeksti->setVisible(true);
-        ui->counterLaatikko->setVisible(true);
+        /*counter related
+        *counter++;
+        *QString laskuri = QString::number(annaCounter());
+        *ui->counterLaatikko->setText(laskuri);
+
+        *     //show counter
+        *ui->counterTeksti->setVisible(true);
+        *ui->counterLaatikko->setVisible(true);
+        */
 
         //empty fields for new entry
         ui->etuNimiLaatikko->setText("");
@@ -78,7 +81,7 @@ void addDialog::on_lahetaNappi_clicked()
         ui->riviLaatikko->setText("");
     }
     else{
-        QMessageBox::information(this, tr("Huomio"),tr("Kaikkia tarvittavia tietoja ei annettu."));
+        QMessageBox::information(this, tr("Huomio"),tr("Kaikkia tarvittavia tietoja ei annettu laatikoihin."));
     }
 
 

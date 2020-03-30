@@ -74,8 +74,8 @@ henkiloTietokanta::henkiloTietokanta(const QString &tablename, QWidget *parent) 
 
 
     //add-window connects
-    connect(addPtr, SIGNAL(lisaaTietokantaan()), this, SLOT(submit()));
-    connect(addPtr,SIGNAL(lahetaHenkilo(QString,QString,QString, QString, QString, bool)),this, SLOT(aseta(QString, QString, QString,QString, QString, bool)));
+    connect(this, SIGNAL(lisaaTietokantaan()), this, SLOT(submit()));
+    connect(addPtr,SIGNAL(lahetaHenkilo(QString&, QString&, QString&, QString&, QString&, bool&)),this, SLOT(aseta(QString&, QString&, QString&,QString&, QString&, bool&)));
 
     //add widgets and menubar
     mainLayout = new QHBoxLayout;
@@ -160,72 +160,75 @@ void henkiloTietokanta::add()
 
 
 }
-void henkiloTietokanta::aseta(QString stretu, QString strSuku, QString lohkoN, QString riviNum, QString paikkaNum, bool arkku)
+void henkiloTietokanta::aseta(QString &stretu, QString &strSuku, QString &lohkoN, QString &riviNum, QString &paikkaNum, bool &arkku)
 {
-    QString foundRowValue;
-    QString foundPlaceValue;
 
-     QSqlRecord record;
-     QSqlRecord rowValueRecord;
+    QSqlRecord record;
+    bool teeRecord;
+
     //insert data to database...
+    //..if row and place values are different
 
-
-    int row = model->rowCount();
-
-
-        //..if row and place values are different
-
-    for(int i=0;i < row; i++)
+    for(int i = 0;i < model->rowCount(); i++)
     {
-       record = model->record(i);
 
-       foundRowValue = record.value("Rivi").toString();
-        foundPlaceValue = record.value("Paikka").toString();
-
-
-           if(model->record(i).contains(foundRowValue) == model->record(i).contains(foundPlaceValue))
-           {
-               if(foundRowValue == paikkaNum)
-               {
-                    QMessageBox::information(this, tr("Huomio"),tr("Kaikkia tarvittavia tietoja ei annettu."));
-                    break;
-                    }
-              }  else
-               {
-            model->insertRows(row, 1);
-            model->setData(model->index(row, 0),lohkoN);
-            model->setData(model->index(row, 2), paikkaNum);
-            model->setData(model->index(row, 1), riviNum);
-
-            model->setData(model->index(row, 3),stretu);
-
-            model->setData(model->index(row, 4), strSuku);
+record = model->record(i);
 
 
 
-            if(arkku)
-            {
-                QString metodi = "Arkku";
-                model->setData(model->index(row, 5), metodi);
 
-            }
-            else
-            {
-                QString uurna = "Uurna";
-                model->setData(model->index(row, 5), uurna);
+       // qDebug() << "Rivi" <<model->record(i).value("Rivi").toString();
+        //qDebug() << "paikka" <<model->record(i).value("Paikka").toString();
+        qDebug() <<"lupa: " <<teeRecord;
 
-            }
+       if(model->record(i).value("Rivi") == riviNum && model->record(i).value("Paikka") == paikkaNum)
+        {
+            QMessageBox::information(this, tr("Huomio"),tr("tarkista, onko samalla rivilla ja paikalla jo henkilo."));
+            teeRecord = false;
+            break;
 
 
         }
-
-
-
+        else
+        {
+          teeRecord = true;
+        }
     }
 
-       }
+    if(teeRecord == true)
+    {
+        qDebug() << model->rowCount();
+        QSqlRecord newRecord = model->record();
+        newRecord.setValue("lohko", lohkoN);
+        newRecord.setValue("Rivi", riviNum);
+        newRecord.setValue("Paikka", paikkaNum);
+        newRecord.setValue("firstname", stretu);
+        newRecord.setValue("lastname", strSuku);
+
+        if(arkku)
+        {
+            QString metodi = "Arkku";
+            newRecord.setValue("burialmethod", metodi);
+
+        }
+        else
+        {
+            QString uurna = "Uurna";
+            newRecord.setValue("burialmethod", uurna);
+
+        }
+        model->insertRecord(model->rowCount(), newRecord);
+        emit lisaaTietokantaan();
+    }
 
 
+}
+
+void henkiloTietokanta::saveToExcel(const QString &tablename)
+{
+
+
+}
 
 
 
