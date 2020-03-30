@@ -12,7 +12,6 @@
 #include <QMessageBox>
 #include <QHBoxLayout>
 #include <QtSql/QSqlError>
-#include <connection.h>
 #include <QtWidgets>
 #include <QString>
 #include <QDebug>
@@ -45,7 +44,8 @@ private slots:
     void add();
     void aseta(QString&, QString&, QString&, QString&, QString&, bool&);
 private:
-
+        void createMenu();
+        void createMenuActions();
         void saveToExcel(const QString &);
         QPushButton *lisaaIhminenButton;
         QPushButton *submitButton;
@@ -60,6 +60,7 @@ private:
         QMenuBar *menuPalkki;
         QTableView *view;
         QMenu *mainMenu;
+        QAction *saveToExel;
 
 
 

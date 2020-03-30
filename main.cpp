@@ -1,5 +1,4 @@
 #include "mainwindow.h"
-#include <tarkistatunnukset.h>
 #include <QApplication>
 
 int main(int argc, char *argv[])
@@ -8,13 +7,12 @@ int main(int argc, char *argv[])
 
 
 
-    if(!createConnection())
+    if(!createConnection1())
     {
         return 1;
     }
 
-//tarkistaTunnukset t("kayttajatable");
-//t.show();
+
 
    MainWindow w;
 

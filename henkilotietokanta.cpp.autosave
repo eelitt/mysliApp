@@ -112,6 +112,7 @@ void henkiloTietokanta::submit()
                              .arg(model->lastError().text()));
     }
 }
+
 void henkiloTietokanta::createMenu()
 {
     //menu
@@ -190,13 +191,6 @@ void henkiloTietokanta::aseta(QString &stretu, QString &strSuku, QString &lohkoN
     {
 
         record = model->record(i);
-
-
-
-
-        // qDebug() << "Rivi" <<model->record(i).value("Rivi").toString();
-        //qDebug() << "paikka" <<model->record(i).value("Paikka").toString();
-        qDebug() <<"lupa: " <<teeRecord;
 
         if(model->record(i).value("Rivi") == riviNum && model->record(i).value("Paikka") == paikkaNum)
         {

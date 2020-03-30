@@ -5,7 +5,7 @@
 #include <QSqlTableModel>
 #include <QSqlRecord>
 #include <QDebug>
-#include <connection.h>
+
 
 
 
