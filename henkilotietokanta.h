@@ -35,7 +35,7 @@ public:
     ~henkiloTietokanta();
 
 signals:
-
+void lisaaTietokantaan();
 
 
 private slots:
@@ -43,8 +43,10 @@ private slots:
     void submit();
     void removeRow();
     void add();
-    void aseta(QString stretu, QString strSuku, QString lohkoN, QString riviNum, QString paikkaNum, bool arkku);
+    void aseta(QString&, QString&, QString&, QString&, QString&, bool&);
 private:
+
+        void saveToExcel(const QString &);
         QPushButton *lisaaIhminenButton;
         QPushButton *submitButton;
         QPushButton *revertButton;

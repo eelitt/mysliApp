@@ -21,8 +21,8 @@ public:
     int annaCounter() const;
 
 signals:
-    void lahetaHenkilo(QString, QString, QString, QString, QString, bool);
-    void lisaaTietokantaan();
+    void lahetaHenkilo(QString&, QString&, QString&, QString&, QString&, bool&);
+
 
 private slots:
     void on_lahetaNappi_clicked();
