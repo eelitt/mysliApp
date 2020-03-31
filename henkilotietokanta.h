@@ -44,13 +44,19 @@ private slots:
     void add();
     void aseta(QString&, QString&, QString&, QString&, QString&, bool&);
 private:
+        void connectFunctions();
+        void showDatabase(QSqlTableModel *);
+        void setSqlTableModel(const QString &);
+        void setMainlayout();
+        void createButtons();
+        void setButtonIcons();
+        void mainWindowSetup();
         void createMenu();
         void createMenuActions();
-        void saveToExcel(const QString &);
+        void saveToExcel();
         QPushButton *lisaaIhminenButton;
         QPushButton *submitButton;
         QPushButton *revertButton;
-        QPushButton *quitButton;
         QPushButton *removeRowButton;
         QDialogButtonBox *buttonBox;
         QSqlTableModel *model;
@@ -61,6 +67,7 @@ private:
         QTableView *view;
         QMenu *mainMenu;
         QAction *saveToExel;
+        QAction *quitButton;
 
 
 
