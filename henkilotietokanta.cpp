@@ -230,16 +230,11 @@ void henkiloTietokanta::aseta(QString &stretu, QString &strSuku, QString &lohkoN
     */
     for(int i = 0;i < model->rowCount(); i++)
     {
-
-       // record = model->record(i);
-
         if(model->record(i).value("Rivi") == riviNum && model->record(i).value("Paikka") == paikkaNum)
         {
             QMessageBox::information(this, tr("Huomio"),tr("tarkista, onko samalla rivilla ja paikalla jo henkilo."));
             teeRecord = false;
             break;
-
-
         }
         else
         {
@@ -288,9 +283,11 @@ void henkiloTietokanta::saveToExcel()
 
 QString filename = QFileDialog::getSaveFileName(this,"Tallenna tiedosto", "Tiedoston nimi.csv","CSV files(.csv);;Zip files(.zip, *.7z)", 0, 0);
 
+
 QFile data(filename);
 if(data.open(QFile::WriteOnly|QFile::Truncate))
 {
+
 
     QTextStream output(&data);
 
