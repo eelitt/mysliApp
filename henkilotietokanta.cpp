@@ -108,15 +108,14 @@ void henkiloTietokanta::createButtons()
     buttonBox->addButton(revertButton, QDialogButtonBox::ActionRole);
 
 
-    //set icons to buttons
+
     setButtonIcons();
 
-    //database connects
+
     connect(lisaaIhminenButton, &QPushButton::clicked,this, &henkiloTietokanta::add);
     connect(submitButton, &QPushButton::clicked, this, &henkiloTietokanta::submit);
     connect(removeRowButton, &QPushButton::clicked, this, &henkiloTietokanta::removeRow);
     connect(revertButton, &QPushButton::clicked,  model, &QSqlTableModel::revertAll);
-
 
 
 
@@ -136,7 +135,7 @@ void henkiloTietokanta::setButtonIcons()
 void henkiloTietokanta::submit()
 
 {
-    //save data straight to database
+
     qDebug() << model->database();
     model->database().transaction();
     if (model->submitAll()) {
@@ -216,8 +215,6 @@ void henkiloTietokanta::add()
 
     addPtr->show();
 
-
-
 }
 void henkiloTietokanta::aseta(QString &stretu, QString &strSuku, QString &lohkoN, QString &riviNum, QString &paikkaNum, bool &arkku)
 {
@@ -225,7 +222,7 @@ void henkiloTietokanta::aseta(QString &stretu, QString &strSuku, QString &lohkoN
     QSqlRecord record;
     bool teeRecord;
 
-   /*insert data to database...
+    /*insert data to database...
     *..if user given row and place values are not already in the database
     */
     for(int i = 0;i < model->rowCount(); i++)
@@ -244,7 +241,7 @@ void henkiloTietokanta::aseta(QString &stretu, QString &strSuku, QString &lohkoN
 
     if(teeRecord == true)
     {
-        qDebug() << model->rowCount();
+
         QSqlRecord newRecord = model->record();
         newRecord.setValue("lohko", lohkoN);
         newRecord.setValue("Rivi", riviNum);
@@ -281,19 +278,35 @@ void henkiloTietokanta::connectFunctions()
 void henkiloTietokanta::saveToExcel()
 {
 
-QString filename = QFileDialog::getSaveFileName(this,"Tallenna tiedosto", "Tiedoston nimi.csv","CSV files(.csv);;Zip files(.zip, *.7z)", 0, 0);
+    QString filename = QFileDialog::getSaveFileName(this, "Tallenna tiedosto", "Tiedoston nimi.csv","CSV files(.csv);;Zip files(.zip, *.7z)", 0, 0);
 
 
-QFile data(filename);
-if(data.open(QFile::WriteOnly|QFile::Truncate))
-{
+    QFile data(filename);
+    if(data.open(QFile::WriteOnly|QFile::Truncate))
+    {
+        QTextStream output(&data);
+        output        << model->record().fieldName(0)
+                      << ";" << model->record().fieldName(1)
+                      << ";" << model->record().fieldName(2)
+                      << ";" << model->record().fieldName(3)
+                      << ";" << model->record().fieldName(4)
+                      << ";" << model->record().fieldName(5)
+                      << endl;
+
+        for(int i = 0; i <model->rowCount(); i++)
+        {
+            output        << model->record(i).value("Lohko").toInt()
+                          << ";" << model->record(i).value("Rivi").toInt()
+                          << ";" << model->record(i).value("Paikka").toInt()
+                          << ";" << model->record(i).value("firstname").toString()
+                          << ";" << model->record(i).value("lastname").toString()
+                          << ";" << model->record(i).value("burialmethod").toString()
+                          << endl;
+        }
 
 
-    QTextStream output(&data);
-
-
-}
-data.close();
+    }
+    data.close();
 }
 
 

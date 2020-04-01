@@ -63,7 +63,7 @@ void tarkistaTunnukset::haeTunnukset(QString &tunnus, QString &salasana)
             break;
         }else
         {
-
+            //tanne msgbox tms
         }
     }
 
@@ -82,7 +82,7 @@ void tarkistaTunnukset::haeTunnukset(QString &tunnus, QString &salasana)
             break;
         }else
         {
-
+            //tanne joku msgbox tms
         }
     }
 
