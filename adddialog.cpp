@@ -8,18 +8,12 @@ addDialog::addDialog(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    //default values
+
     ui->arkkuBox->setChecked(true);
     ui->counterLaatikko->setVisible(false);
     ui->counterTeksti->setVisible(false);
 
-    //setting acceptable inputs
-    ui->etuNimiLaatikko->setInputMask("AAAAAAAA");
-    ui->sukunimiLaatikko->setInputMask("AAAAAAAAA");
-    ui->lohkoLaatikko->setInputMask("000");
-    ui->riviLaatikko->setInputMask("000");
-    ui->paikkaLaatikko->setInputMask("000");
-
+    setInputTypes();
 
 }
 
@@ -41,7 +35,7 @@ void addDialog::on_lahetaNappi_clicked()
 {
 
 
-    //get wanted data
+
     QString strEtu = ui->etuNimiLaatikko->text();
     QString strSuku = ui->sukunimiLaatikko->text();
     QString lohkoNum = ui->lohkoLaatikko->text();
@@ -105,11 +99,22 @@ void addDialog::on_uurnaBox_clicked()
 
 void addDialog::on_tyhjennaNappi_clicked()
 {
-    //empty fields on click
+
     ui->etuNimiLaatikko->setText("");
     ui->lohkoLaatikko->setText("");
     ui->sukunimiLaatikko->setText("");
     ui->paikkaLaatikko->setText("");
     ui->riviLaatikko->setText("");
+
+}
+
+void addDialog::setInputTypes()
+{
+
+    ui->etuNimiLaatikko->setInputMask("AAAAAAAA");
+    ui->sukunimiLaatikko->setInputMask("AAAAAAAAA");
+    ui->lohkoLaatikko->setInputMask("000");
+    ui->riviLaatikko->setInputMask("000");
+    ui->paikkaLaatikko->setInputMask("000");
 
 }

@@ -25,19 +25,16 @@ signals:
 
 
 private slots:
+
     void on_lahetaNappi_clicked();
-
     void on_arkkuBox_clicked();
-
     void on_uurnaBox_clicked();
-
-
-
     void on_tyhjennaNappi_clicked();
 
 private:
     Ui::addDialog *ui;
     int counter = 0;
+    void setInputTypes();
 };
 
 #endif // ADDDIALOG_H
