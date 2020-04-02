@@ -7,7 +7,7 @@
 #include <QtSql/QSqlError>
 #include <QMessageBox>
 
-static bool createConnection1()
+static bool createConnection()
 {
 
       QSqlDatabase db = QSqlDatabase::addDatabase("QMYSQL");

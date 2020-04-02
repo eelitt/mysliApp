@@ -7,6 +7,7 @@ tarkistaTunnukset::tarkistaTunnukset(const QString &tablename, QWidget *parent) 
 {
     ui->setupUi(this);
 
+    hideContextMenus();
     model = new QSqlTableModel(this);
     model->setTable(tablename);
     model->select();
@@ -41,6 +42,11 @@ tarkistaTunnukset::~tarkistaTunnukset()
     delete ui;
     delete model;
 
+}
+void tarkistaTunnukset::hideContextMenus()
+{
+    setWindowFlags(windowFlags() & (~Qt::WindowContextHelpButtonHint));
+     windowFlags();
 }
 
 void tarkistaTunnukset::haeTunnukset(QString &tunnus, QString &salasana)
@@ -82,7 +88,14 @@ void tarkistaTunnukset::haeTunnukset(QString &tunnus, QString &salasana)
             break;
         }else
         {
-            //tanne joku msgbox tms
+          QMessageBox *mbox = new QMessageBox;
+          mbox->setWindowTitle(tr("huomio"));
+          mbox->setText("salasana vaarin");
+          mbox->show();
+          QTimer::singleShot(1000, mbox, SLOT(hide()));
+          mbox->exec();
+                  delete mbox;
+
         }
     }
 

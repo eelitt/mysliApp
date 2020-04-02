@@ -48,9 +48,11 @@ void addDialog::on_lahetaNappi_clicked()
         arkku = false;
     }
 
-    //if all wanted data is not given, msgbox is spawned
-    if(ui->etuNimiLaatikko->isModified() && ui->sukunimiLaatikko->isModified()
-            && ui->lohkoLaatikko->isModified() && ui->riviLaatikko->isModified()
+
+    if(ui->etuNimiLaatikko->isModified()
+            && ui->sukunimiLaatikko->isModified()
+            && ui->lohkoLaatikko->isModified()
+            && ui->riviLaatikko->isModified()
             && ui->paikkaLaatikko->isModified())
 
     {

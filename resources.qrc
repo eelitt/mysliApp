@@ -2,5 +2,7 @@
     <qresource prefix="/">
         <file>resurssit/bin-icon.jpg</file>
         <file>resurssit/karsamakivaakuna.jpg</file>
+        <file>resurssit/etsilasi1.jpg</file>
+        <file>resurssit/etsi.jpg</file>
     </qresource>
 </RCC>

@@ -1,4 +1,5 @@
 #include <henkilotietokanta.h>
+#include <ui_etsi.h>
 
 
 henkiloTietokanta::henkiloTietokanta(const QString &tablename, QWidget *parent) :
@@ -6,12 +7,11 @@ henkiloTietokanta::henkiloTietokanta(const QString &tablename, QWidget *parent) 
 
 {
 
-    //mainwindow setup
+
     mainWindowSetup();
 
     createMenuActions();
     createMenu();
-
 
     model = new QSqlTableModel(this);
     addPtr = new addDialog(this);
@@ -19,11 +19,9 @@ henkiloTietokanta::henkiloTietokanta(const QString &tablename, QWidget *parent) 
     setSqlTableModel(tablename);
     showDatabase(model);
 
-
     createButtons();
 
     connectFunctions();
-
 
     setMainlayout();
 
@@ -42,12 +40,14 @@ henkiloTietokanta::~henkiloTietokanta()
     delete mainMenu;
     delete menuPalkki;
     delete saveToExel;
+    delete etsiButton;
+
 
 }
 void henkiloTietokanta::mainWindowSetup()
 {
 
-    resize(460, 350);
+    resize(490, 400);
     setWindowTitle(tr("Henkilötietokanta"));
     QPixmap pixMapIcon(":/resurssit/karsamakivaakuna.jpg");
     QIcon windowIcon(pixMapIcon);
@@ -75,7 +75,12 @@ void henkiloTietokanta::showDatabase(QSqlTableModel *modeli)
     view = new QTableView;
     view->setModel(modeli);
     view->resizeColumnsToContents();
+    view->resizeRowsToContents();
     view->setSortingEnabled(true);
+
+
+
+
 }
 
 void henkiloTietokanta::setMainlayout()
@@ -97,13 +102,16 @@ void henkiloTietokanta::createButtons()
     lisaaIhminenButton->setDefault(true);
     submitButton = new QPushButton(tr("tallenna muutokset"));
     lisaaIhminenButton->setDefault(true);
-    removeRowButton = new QPushButton(tr("poista"));
+    etsiButton = new QPushButton(tr(""));
+    //etsiButton->setStyleSheet("background: white; ");
+    removeRowButton = new QPushButton(tr(""));
     revertButton = new QPushButton(tr("&revert"));
 
 
     buttonBox = new QDialogButtonBox(Qt::Vertical);
     buttonBox->addButton(lisaaIhminenButton, QDialogButtonBox::ActionRole);
     buttonBox->addButton(submitButton, QDialogButtonBox::ActionRole);
+    buttonBox->addButton(etsiButton, QDialogButtonBox::ActionRole);
     buttonBox->addButton(removeRowButton, QDialogButtonBox::ActionRole);
     buttonBox->addButton(revertButton, QDialogButtonBox::ActionRole);
 
@@ -111,11 +119,11 @@ void henkiloTietokanta::createButtons()
 
     setButtonIcons();
 
-
+    connect(etsiButton, &QPushButton::clicked, this, &henkiloTietokanta::search);
     connect(lisaaIhminenButton, &QPushButton::clicked,this, &henkiloTietokanta::add);
     connect(submitButton, &QPushButton::clicked, this, &henkiloTietokanta::submit);
     connect(removeRowButton, &QPushButton::clicked, this, &henkiloTietokanta::removeRow);
-    connect(revertButton, &QPushButton::clicked,  model, &QSqlTableModel::revertAll);
+    connect(revertButton, &QPushButton::clicked,  this, &henkiloTietokanta::revertAll);
 
 
 
@@ -128,6 +136,13 @@ void henkiloTietokanta::setButtonIcons()
     QIcon buttonIcon(pixmap);
     removeRowButton->setIcon(buttonIcon);
     removeRowButton->setIconSize(pixmap.rect().size());
+
+    //etsibutton icon
+    QPixmap pixmap2(":/resurssit/etsi.jpg");
+    QIcon buttonIcon2(pixmap2);
+    etsiButton->setIcon(buttonIcon2);
+    etsiButton->setIconSize(pixmap2.rect().size());
+
 
 
 }
@@ -142,9 +157,23 @@ void henkiloTietokanta::submit()
         model->database().commit();
     } else {
         model->database().rollback();
-        QMessageBox::warning(this, tr("Cached Table"),
+        QMessageBox::warning(this, tr("henkilotietokanta"),
                              tr("The database reported an error: %1")
                              .arg(model->lastError().text()));
+    }
+}
+void henkiloTietokanta::revertAll()
+{
+    model->revertAll();
+
+    for(int i = 0; i < model->rowCount(); i++)
+    {
+
+
+        if(view->isRowHidden(i))
+       {
+           view->showRow(i);
+       }
     }
 }
 
@@ -156,8 +185,6 @@ void henkiloTietokanta::createMenu()
     menuPalkki->addMenu(mainMenu);
     mainMenu->addAction(saveToExel);
     mainMenu->addAction(quitButton);
-
-
 
 }
 
@@ -186,7 +213,7 @@ void henkiloTietokanta::removeRow()
 
     }
 
-    //spawning a messagebox
+
     msgBox.setText("Oot poistamassa henkilöä tietokannasta.");
     msgBox.setInformativeText("Ootko varma?");
 
@@ -209,7 +236,50 @@ void henkiloTietokanta::removeRow()
     delete backButton;
 }
 
+void henkiloTietokanta::search()
+{
 
+   QInputDialog *inputDialog = new QInputDialog;
+
+
+    inputDialog->setWindowFlags(inputDialog->windowFlags() & (~Qt::WindowContextHelpButtonHint));
+    inputDialog->setWindowTitle("Etsi");
+
+    inputDialog->setLabelText("Anna etsittava arvo");
+    inputDialog->setOkButtonText("Etsi");
+    inputDialog->setCancelButtonText("Takaisin");
+    inputDialog->exec();
+
+    QString text;
+    text = inputDialog->textValue();
+    if(!text.isEmpty())
+    {
+    for(int i = 0; i < model->rowCount(); i++)
+    {
+
+            if(model->record(i).value("Lohko") != text ||
+                model->record(i).value("Rivi") != text ||
+                model->record(i).value("Paikka") != text ||
+                model->record(i).value("firstname") != text ||
+                model->record(i).value("lastname") != text ||
+                model->record(i).value("burialmethod") != text)
+            {
+                view->hideRow(i);
+            }
+            if(model->record(i).value("Lohko") == text ||
+                    model->record(i).value("Rivi") == text ||
+                    model->record(i).value("Paikka") == text ||
+                    model->record(i).value("firstname") == text ||
+                    model->record(i).value("lastname") == text ||
+                    model->record(i).value("burialmethod") == text)
+            {
+                 view->showRow(i);
+            }
+    }
+}
+    delete inputDialog;
+
+}
 void henkiloTietokanta::add()
 {
 
@@ -219,7 +289,6 @@ void henkiloTietokanta::add()
 void henkiloTietokanta::aseta(QString &stretu, QString &strSuku, QString &lohkoN, QString &riviNum, QString &paikkaNum, bool &arkku)
 {
 
-    QSqlRecord record;
     bool teeRecord;
 
     /*insert data to database...
@@ -270,7 +339,7 @@ void henkiloTietokanta::aseta(QString &stretu, QString &strSuku, QString &lohkoN
 void henkiloTietokanta::connectFunctions()
 {
     //add-window connects
-    connect(this, SIGNAL(lisaaTietokantaan()), this, SLOT(submit()));
+    connect(this, SIGNAL(lisaaTietokantaan()), this, SLOT(submit()));    
     connect(addPtr,SIGNAL(lahetaHenkilo(QString&, QString&, QString&, QString&, QString&, bool&)),this, SLOT(aseta(QString&, QString&, QString&,QString&, QString&, bool&)));
 
 }
