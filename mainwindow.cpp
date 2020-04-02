@@ -6,7 +6,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
 {
 
-
+    createConnection();
     tunnusOlio = new tarkistaTunnukset("kayttajatable");
 
 

@@ -20,30 +20,34 @@
 #include <QBoxLayout>
 #include <QmenuBar>
 #include <QSqlRecord>
+#include <ui_etsi.h>
 
 class henkiloTietokanta : public QWidget
 {
     Q_OBJECT
 
 public:
+
     explicit henkiloTietokanta(const QString &tablename, QWidget *parent = 0);
-
-
-
 
     ~henkiloTietokanta();
 
 signals:
+
 void lisaaTietokantaan();
+
 
 
 private slots:
 
     void submit();
     void removeRow();
+    void search();
+    void revertAll();
     void add();
     void aseta(QString&, QString&, QString&, QString&, QString&, bool&);
 private:
+
         void connectFunctions();
         void showDatabase(QSqlTableModel *);
         void setSqlTableModel(const QString &);
@@ -58,6 +62,7 @@ private:
         QPushButton *submitButton;
         QPushButton *revertButton;
         QPushButton *removeRowButton;
+        QPushButton *etsiButton;
         QDialogButtonBox *buttonBox;
         QSqlTableModel *model;
         addDialog *addPtr;

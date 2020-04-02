@@ -5,6 +5,8 @@
 #include <QSqlTableModel>
 #include <QSqlRecord>
 #include <QDebug>
+#include <QMessageBox>
+#include <QTimer>
 
 
 
@@ -36,6 +38,8 @@ private:
     bool identification = false;
 
     QSqlTableModel *model;
+    void hideContextMenus();
+
 
 };
 

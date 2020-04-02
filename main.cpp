@@ -7,10 +7,6 @@ int main(int argc, char *argv[])
 
 
 
-    if(!createConnection1())
-    {
-        return 1;
-    }
 
 
 
