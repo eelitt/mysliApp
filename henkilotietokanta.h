@@ -20,7 +20,8 @@
 #include <QBoxLayout>
 #include <QmenuBar>
 #include <QSqlRecord>
-#include <ui_etsi.h>
+#include <string>
+
 
 class henkiloTietokanta : public QWidget
 {

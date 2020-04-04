@@ -8,11 +8,12 @@ tarkistaTunnukset::tarkistaTunnukset(const QString &tablename, QWidget *parent) 
     ui->setupUi(this);
 
     hideContextMenus();
-    model = new QSqlTableModel(this);
-    model->setTable(tablename);
-    model->select();
+   setUsedSqlTableModel(tablename);
+   setupInfoBoxes();
 
-    this->connect(this, SIGNAL(tunnusHaku(QString&,QString&)), this, SLOT(haeTunnukset(QString&, QString&)));
+
+    connects();
+
 
 
 
@@ -39,8 +40,8 @@ tarkistaTunnukset::tarkistaTunnukset(const QString &tablename, QWidget *parent) 
 
 tarkistaTunnukset::~tarkistaTunnukset()
 {
-    delete ui;
-    delete model;
+   delete ui;
+   delete model;
 
 }
 void tarkistaTunnukset::hideContextMenus()
@@ -48,11 +49,19 @@ void tarkistaTunnukset::hideContextMenus()
     setWindowFlags(windowFlags() & (~Qt::WindowContextHelpButtonHint));
      windowFlags();
 }
+void tarkistaTunnukset::setUsedSqlTableModel(const QString &tablename)
+{
+
+    model = new QSqlTableModel(this);
+    model->setTable(tablename);
+    model->select();
+
+}
 
 void tarkistaTunnukset::haeTunnukset(QString &tunnus, QString &salasana)
 {
-    bool nameTest =false;
-    bool passwordTest =false;
+    bool nameTest = false;
+    bool passwordTest = false;
 
 
     for(int i = 0; i < model->rowCount(); i++)
@@ -69,7 +78,7 @@ void tarkistaTunnukset::haeTunnukset(QString &tunnus, QString &salasana)
             break;
         }else
         {
-            //tanne msgbox tms
+
         }
     }
 
@@ -88,15 +97,11 @@ void tarkistaTunnukset::haeTunnukset(QString &tunnus, QString &salasana)
             break;
         }else
         {
-          QMessageBox *mbox = new QMessageBox;
-          mbox->setWindowTitle(tr("huomio"));
-          mbox->setText("salasana vaarin");
-          mbox->show();
-          QTimer::singleShot(1000, mbox, SLOT(hide()));
-          mbox->exec();
-                  delete mbox;
+    failInfoBoxAnimations(ui->failPassOrNameBox);
+
 
         }
+
     }
 
     if(nameTest == true && passwordTest == true)
@@ -130,5 +135,31 @@ void tarkistaTunnukset::on_pushButton_clicked()
 bool tarkistaTunnukset::getIdentification() const
 {
     return identification;
+
+}
+void tarkistaTunnukset::connects()
+{
+
+     this->connect(this, SIGNAL(tunnusHaku(QString&,QString&)), this, SLOT(haeTunnukset(QString&, QString&)));
+}
+void tarkistaTunnukset::setupInfoBoxes()
+{
+    ui->failPassOrNameBox->setVisible(false);
+
+}
+
+void tarkistaTunnukset::failInfoBoxAnimations(QLabel *Label)
+
+{
+    Label->setVisible(true);
+    QGraphicsOpacityEffect *endEffect = new QGraphicsOpacityEffect();
+    Label->setGraphicsEffect(endEffect);
+    QPropertyAnimation *endAnim = new QPropertyAnimation(endEffect, "opacity");
+    endAnim->setDuration(2500);
+    endAnim->setStartValue(Label->windowOpacity());
+    endAnim->setEndValue(0.0);
+    endAnim->setEasingCurve(QEasingCurve::OutQuad);
+    connect(endAnim, &QPropertyAnimation::finished,[=](){});
+    endAnim->start(QAbstractAnimation::DeleteWhenStopped);
 
 }

@@ -26,7 +26,7 @@ QT_BEGIN_NAMESPACE
 class Ui_tarkistaTunnukset
 {
 public:
-    QWidget *widget;
+    QWidget *layoutWidget;
     QGridLayout *gridLayout;
     QLabel *label;
     QLabel *label_2;
@@ -34,6 +34,7 @@ public:
     QLabel *label_3;
     QLineEdit *salasanaLaatikko;
     QPushButton *pushButton;
+    QLabel *failPassOrNameBox;
 
     void setupUi(QDialog *tarkistaTunnukset)
     {
@@ -51,13 +52,13 @@ public:
         icon.addFile(QStringLiteral("resurssit/karsamakivaakuna.jpg"), QSize(), QIcon::Normal, QIcon::Off);
         tarkistaTunnukset->setWindowIcon(icon);
         tarkistaTunnukset->setStyleSheet(QStringLiteral(""));
-        widget = new QWidget(tarkistaTunnukset);
-        widget->setObjectName(QStringLiteral("widget"));
-        widget->setGeometry(QRect(141, 121, 165, 92));
-        gridLayout = new QGridLayout(widget);
+        layoutWidget = new QWidget(tarkistaTunnukset);
+        layoutWidget->setObjectName(QStringLiteral("layoutWidget"));
+        layoutWidget->setGeometry(QRect(141, 121, 165, 92));
+        gridLayout = new QGridLayout(layoutWidget);
         gridLayout->setObjectName(QStringLiteral("gridLayout"));
         gridLayout->setContentsMargins(0, 0, 0, 0);
-        label = new QLabel(widget);
+        label = new QLabel(layoutWidget);
         label->setObjectName(QStringLiteral("label"));
         QFont font;
         font.setFamily(QStringLiteral("Tahoma"));
@@ -67,9 +68,9 @@ public:
         font.setWeight(75);
         label->setFont(font);
 
-        gridLayout->addWidget(label, 0, 1, 1, 1);
+        gridLayout->addWidget(label, 0, 1, 1, 1, Qt::AlignHCenter);
 
-        label_2 = new QLabel(widget);
+        label_2 = new QLabel(layoutWidget);
         label_2->setObjectName(QStringLiteral("label_2"));
         QFont font1;
         font1.setFamily(QStringLiteral("Tahoma"));
@@ -80,7 +81,7 @@ public:
 
         gridLayout->addWidget(label_2, 1, 0, 1, 1);
 
-        tunnusLaatikko = new QLineEdit(widget);
+        tunnusLaatikko = new QLineEdit(layoutWidget);
         tunnusLaatikko->setObjectName(QStringLiteral("tunnusLaatikko"));
         tunnusLaatikko->setStyleSheet(QLatin1String("QLineEdit {\n"
 "border-radius: 5px;\n"
@@ -89,13 +90,13 @@ public:
 
         gridLayout->addWidget(tunnusLaatikko, 1, 1, 1, 1);
 
-        label_3 = new QLabel(widget);
+        label_3 = new QLabel(layoutWidget);
         label_3->setObjectName(QStringLiteral("label_3"));
         label_3->setFont(font1);
 
         gridLayout->addWidget(label_3, 2, 0, 1, 1);
 
-        salasanaLaatikko = new QLineEdit(widget);
+        salasanaLaatikko = new QLineEdit(layoutWidget);
         salasanaLaatikko->setObjectName(QStringLiteral("salasanaLaatikko"));
         QSizePolicy sizePolicy1(QSizePolicy::Expanding, QSizePolicy::Fixed);
         sizePolicy1.setHorizontalStretch(11);
@@ -110,7 +111,7 @@ public:
 
         gridLayout->addWidget(salasanaLaatikko, 2, 1, 1, 1);
 
-        pushButton = new QPushButton(widget);
+        pushButton = new QPushButton(layoutWidget);
         pushButton->setObjectName(QStringLiteral("pushButton"));
         pushButton->setStyleSheet(QLatin1String("QPushButton {\n"
 "\n"
@@ -119,6 +120,26 @@ public:
 
         gridLayout->addWidget(pushButton, 3, 1, 1, 1);
 
+        failPassOrNameBox = new QLabel(tarkistaTunnukset);
+        failPassOrNameBox->setObjectName(QStringLiteral("failPassOrNameBox"));
+        failPassOrNameBox->setGeometry(QRect(170, 30, 171, 81));
+        QFont font2;
+        font2.setFamily(QStringLiteral("Tahoma"));
+        font2.setPointSize(9);
+        font2.setBold(true);
+        font2.setItalic(false);
+        font2.setWeight(75);
+        font2.setStyleStrategy(QFont::PreferAntialias);
+        failPassOrNameBox->setFont(font2);
+        failPassOrNameBox->setStyleSheet(QLatin1String("QLabel {\n"
+"background-color:\n"
+"	qlineargradient(spread:pad, x1:0.579, y1:0.472, x2:0.0220562, y2:0.949, stop:0 rgba(207, 62, 62, 255), stop:1 rgba(255, 255, 255, 255));\n"
+"\n"
+"border-radius: 5px\n"
+"\n"
+"}"));
+        failPassOrNameBox->setFrameShadow(QFrame::Sunken);
+        failPassOrNameBox->setWordWrap(false);
 
         retranslateUi(tarkistaTunnukset);
 
@@ -132,6 +153,7 @@ public:
         label_2->setText(QApplication::translate("tarkistaTunnukset", "Tunnus", Q_NULLPTR));
         label_3->setText(QApplication::translate("tarkistaTunnukset", "Salasana", Q_NULLPTR));
         pushButton->setText(QApplication::translate("tarkistaTunnukset", "Sis\303\244\303\244n", Q_NULLPTR));
+        failPassOrNameBox->setText(QApplication::translate("tarkistaTunnukset", "  v\303\244\303\244r\303\244 tunnus tai salasana", Q_NULLPTR));
     } // retranslateUi
 
 };
