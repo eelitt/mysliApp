@@ -1,5 +1,5 @@
 #include <henkilotietokanta.h>
-#include <ui_etsi.h>
+
 
 
 henkiloTietokanta::henkiloTietokanta(const QString &tablename, QWidget *parent) :
@@ -13,7 +13,7 @@ henkiloTietokanta::henkiloTietokanta(const QString &tablename, QWidget *parent) 
     createMenuActions();
     createMenu();
 
-    model = new QSqlTableModel(this);
+
     addPtr = new addDialog(this);
 
     setSqlTableModel(tablename);
@@ -57,16 +57,30 @@ void henkiloTietokanta::mainWindowSetup()
 void henkiloTietokanta::setSqlTableModel(const QString &tablename)
 {
     //create viewable table
+     model = new QSqlTableModel(this);
     model->setTable(tablename);
     model->setEditStrategy(QSqlTableModel::OnManualSubmit);
     model->select();
 
-    model->setHeaderData(0, Qt::Horizontal, tr("Lohko"));
-    model->setHeaderData(1, Qt::Horizontal, tr("Rivi"));
-    model->setHeaderData(2, Qt::Horizontal, tr("Paikka"));
-    model->setHeaderData(3, Qt::Horizontal, tr("Etunimi"));
-    model->setHeaderData(4, Qt::Horizontal, tr("Sukunimi"));
-    model->setHeaderData(5, Qt::Horizontal, tr("arkku/uurna"));
+    std::string str1 = model->record().fieldName(0).toStdString();
+    const char *lohko = str1.c_str();
+    std::string str2 = model->record().fieldName(1).toStdString();
+    const char *rivi = str2.c_str();
+    std::string str3 = model->record().fieldName(2).toStdString();
+    const char *paikka = str3.c_str();
+    std::string str4 = model->record().fieldName(3).toStdString();
+    const char *etunimi = str4.c_str();
+    std::string str5 = model->record().fieldName(4).toStdString();
+    const char *sukunimi = str5.c_str();
+    std::string str6 = model->record().fieldName(5).toStdString();
+    const char *burialmethod = str6.c_str();
+
+    model->setHeaderData(0, Qt::Horizontal, tr(lohko));
+    model->setHeaderData(1, Qt::Horizontal, tr(rivi));
+    model->setHeaderData(2, Qt::Horizontal, tr(paikka));
+    model->setHeaderData(3, Qt::Horizontal, tr(etunimi));
+    model->setHeaderData(4, Qt::Horizontal, tr(sukunimi));
+    model->setHeaderData(5, Qt::Horizontal, tr(burialmethod));
 
 }
 void henkiloTietokanta::showDatabase(QSqlTableModel *modeli)
@@ -140,8 +154,9 @@ void henkiloTietokanta::setButtonIcons()
     //etsibutton icon
     QPixmap pixmap2(":/resurssit/etsi.jpg");
     QIcon buttonIcon2(pixmap2);
+
     etsiButton->setIcon(buttonIcon2);
-    etsiButton->setIconSize(pixmap2.rect().size());
+    //etsiButton->setIconSize(pixmap2.rect().size());
 
 
 
@@ -171,9 +186,9 @@ void henkiloTietokanta::revertAll()
 
 
         if(view->isRowHidden(i))
-       {
-           view->showRow(i);
-       }
+        {
+            view->showRow(i);
+        }
     }
 }
 
@@ -239,9 +254,9 @@ void henkiloTietokanta::removeRow()
 void henkiloTietokanta::search()
 {
 
-   QInputDialog *inputDialog = new QInputDialog;
+    QInputDialog *inputDialog = new QInputDialog;
 
-
+    QString text;
     inputDialog->setWindowFlags(inputDialog->windowFlags() & (~Qt::WindowContextHelpButtonHint));
     inputDialog->setWindowTitle("Etsi");
 
@@ -250,33 +265,33 @@ void henkiloTietokanta::search()
     inputDialog->setCancelButtonText("Takaisin");
     inputDialog->exec();
 
-    QString text;
+
     text = inputDialog->textValue();
     if(!text.isEmpty())
     {
-    for(int i = 0; i < model->rowCount(); i++)
-    {
+        for(int i = 0; i < model->rowCount(); i++)
+        {
 
             if(model->record(i).value("Lohko") != text ||
-                model->record(i).value("Rivi") != text ||
-                model->record(i).value("Paikka") != text ||
-                model->record(i).value("firstname") != text ||
-                model->record(i).value("lastname") != text ||
-                model->record(i).value("burialmethod") != text)
+                    model->record(i).value("Rivi") != text ||
+                    model->record(i).value("Paikka") != text ||
+                    model->record(i).value("Etunimi") != text ||
+                    model->record(i).value("Sukunimi") != text ||
+                    model->record(i).value("Hautaustapa") != text)
             {
                 view->hideRow(i);
             }
             if(model->record(i).value("Lohko") == text ||
                     model->record(i).value("Rivi") == text ||
                     model->record(i).value("Paikka") == text ||
-                    model->record(i).value("firstname") == text ||
-                    model->record(i).value("lastname") == text ||
-                    model->record(i).value("burialmethod") == text)
+                    model->record(i).value("Etunimi") == text ||
+                    model->record(i).value("Sukunimi") == text ||
+                    model->record(i).value("Hautaustapa") == text)
             {
-                 view->showRow(i);
+                view->showRow(i);
             }
+        }
     }
-}
     delete inputDialog;
 
 }
@@ -315,19 +330,19 @@ void henkiloTietokanta::aseta(QString &stretu, QString &strSuku, QString &lohkoN
         newRecord.setValue("lohko", lohkoN);
         newRecord.setValue("Rivi", riviNum);
         newRecord.setValue("Paikka", paikkaNum);
-        newRecord.setValue("firstname", stretu);
-        newRecord.setValue("lastname", strSuku);
+        newRecord.setValue("Etunimi", stretu);
+        newRecord.setValue("Sukunimi", strSuku);
 
         if(arkku)
         {
             QString metodi = "Arkku";
-            newRecord.setValue("burialmethod", metodi);
+            newRecord.setValue("hautaustapa", metodi);
 
         }
         else
         {
             QString uurna = "Uurna";
-            newRecord.setValue("burialmethod", uurna);
+            newRecord.setValue("hautaustapa", uurna);
 
         }
         model->insertRecord(model->rowCount(), newRecord);
@@ -339,7 +354,7 @@ void henkiloTietokanta::aseta(QString &stretu, QString &strSuku, QString &lohkoN
 void henkiloTietokanta::connectFunctions()
 {
     //add-window connects
-    connect(this, SIGNAL(lisaaTietokantaan()), this, SLOT(submit()));    
+    connect(this, SIGNAL(lisaaTietokantaan()), this, SLOT(submit()));
     connect(addPtr,SIGNAL(lahetaHenkilo(QString&, QString&, QString&, QString&, QString&, bool&)),this, SLOT(aseta(QString&, QString&, QString&,QString&, QString&, bool&)));
 
 }

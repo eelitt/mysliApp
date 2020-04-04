@@ -7,6 +7,8 @@
 #include <QDebug>
 #include <QMessageBox>
 #include <QTimer>
+#include <QGraphicsOpacityEffect>
+#include <QPropertyAnimation>
 
 
 
@@ -20,7 +22,7 @@ class tarkistaTunnukset : public QDialog
     Q_OBJECT
 
 public:
-    explicit tarkistaTunnukset(const QString &tablename,QWidget *parent = 0);
+    explicit tarkistaTunnukset(const QString &tablename, QWidget *parent);
     ~tarkistaTunnukset();
 
     bool getIdentification() const;
@@ -32,13 +34,18 @@ private slots:
     void haeTunnukset(QString&, QString&);
     void on_pushButton_clicked();
 
+
+
 private:
 
     Ui::tarkistaTunnukset *ui;
     bool identification = false;
-
     QSqlTableModel *model;
     void hideContextMenus();
+    void setUsedSqlTableModel(const QString &tablename);
+    void setupInfoBoxes();
+    void connects();
+    void failInfoBoxAnimations(QLabel *Label);
 
 
 };
