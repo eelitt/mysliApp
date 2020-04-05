@@ -17,8 +17,7 @@ public:
     explicit addDialog(QWidget *parent = 0);
     ~addDialog();
 
-    void asetaCounter(int);
-    int annaCounter() const;
+
 
 signals:
     void lahetaHenkilo(QString&, QString&, QString&, QString&, QString&, bool&);
@@ -33,8 +32,9 @@ private slots:
 
 private:
     Ui::addDialog *ui;
-    int counter = 0;
+    void setupDialogBoxes();
     void setInputTypes();
+    void setupUi();
 };
 
 #endif // ADDDIALOG_H

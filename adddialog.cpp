@@ -6,13 +6,11 @@ addDialog::addDialog(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::addDialog)
 {
-    ui->setupUi(this);
+    setupUi();
 
 
-    ui->arkkuBox->setChecked(true);
-    ui->counterLaatikko->setVisible(false);
-    ui->counterTeksti->setVisible(false);
 
+    setupDialogBoxes();
     setInputTypes();
 
 }
@@ -21,14 +19,12 @@ addDialog::~addDialog()
 {
     delete ui;
 }
-void addDialog::asetaCounter(int arvo)
+void addDialog::setupUi()
 {
-    counter = arvo;
+    ui->setupUi(this);
+    setWindowTitle("lisää tietoja");
+    setWindowFlags(windowFlags() & (~Qt::WindowContextHelpButtonHint));
 
-}
-int addDialog::annaCounter() const
-{
-    return counter;
 }
 
 void addDialog::on_lahetaNappi_clicked()
@@ -58,16 +54,6 @@ void addDialog::on_lahetaNappi_clicked()
     {
         emit lahetaHenkilo(strEtu, strSuku, lohkoNum, riviNum, paikkaNum, arkku);
 
-
-        /*counter related
-        *counter++;
-        *QString laskuri = QString::number(annaCounter());
-        *ui->counterLaatikko->setText(laskuri);
-
-        *     //show counter
-        *ui->counterTeksti->setVisible(true);
-        *ui->counterLaatikko->setVisible(true);
-        */
 
         //empty fields for new entry
         ui->etuNimiLaatikko->setText("");
@@ -118,5 +104,12 @@ void addDialog::setInputTypes()
     ui->lohkoLaatikko->setInputMask("000");
     ui->riviLaatikko->setInputMask("000");
     ui->paikkaLaatikko->setInputMask("000");
+
+}
+void addDialog::setupDialogBoxes()
+{
+
+    ui->arkkuBox->setChecked(true);
+
 
 }
