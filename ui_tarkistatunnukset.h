@@ -55,34 +55,38 @@ public:
         layoutWidget = new QWidget(tarkistaTunnukset);
         layoutWidget->setObjectName(QStringLiteral("layoutWidget"));
         layoutWidget->setGeometry(QRect(141, 121, 165, 92));
+        QFont font;
+        font.setFamily(QStringLiteral("Verdana"));
+        layoutWidget->setFont(font);
         gridLayout = new QGridLayout(layoutWidget);
         gridLayout->setObjectName(QStringLiteral("gridLayout"));
         gridLayout->setContentsMargins(0, 0, 0, 0);
         label = new QLabel(layoutWidget);
         label->setObjectName(QStringLiteral("label"));
-        QFont font;
-        font.setFamily(QStringLiteral("Tahoma"));
-        font.setPointSize(12);
-        font.setBold(true);
-        font.setItalic(false);
-        font.setWeight(75);
-        label->setFont(font);
+        QFont font1;
+        font1.setFamily(QStringLiteral("Verdana"));
+        font1.setPointSize(12);
+        font1.setBold(true);
+        font1.setItalic(false);
+        font1.setWeight(75);
+        label->setFont(font1);
 
         gridLayout->addWidget(label, 0, 1, 1, 1, Qt::AlignHCenter);
 
         label_2 = new QLabel(layoutWidget);
         label_2->setObjectName(QStringLiteral("label_2"));
-        QFont font1;
-        font1.setFamily(QStringLiteral("Tahoma"));
-        font1.setPointSize(8);
-        font1.setBold(true);
-        font1.setWeight(75);
-        label_2->setFont(font1);
+        QFont font2;
+        font2.setFamily(QStringLiteral("Verdana"));
+        font2.setPointSize(8);
+        font2.setBold(true);
+        font2.setWeight(75);
+        label_2->setFont(font2);
 
         gridLayout->addWidget(label_2, 1, 0, 1, 1);
 
         tunnusLaatikko = new QLineEdit(layoutWidget);
         tunnusLaatikko->setObjectName(QStringLiteral("tunnusLaatikko"));
+        tunnusLaatikko->setFont(font);
         tunnusLaatikko->setStyleSheet(QLatin1String("QLineEdit {\n"
 "border-radius: 5px;\n"
 "}\n"
@@ -92,7 +96,7 @@ public:
 
         label_3 = new QLabel(layoutWidget);
         label_3->setObjectName(QStringLiteral("label_3"));
-        label_3->setFont(font1);
+        label_3->setFont(font2);
 
         gridLayout->addWidget(label_3, 2, 0, 1, 1);
 
@@ -103,6 +107,7 @@ public:
         sizePolicy1.setVerticalStretch(0);
         sizePolicy1.setHeightForWidth(salasanaLaatikko->sizePolicy().hasHeightForWidth());
         salasanaLaatikko->setSizePolicy(sizePolicy1);
+        salasanaLaatikko->setFont(font);
         salasanaLaatikko->setStyleSheet(QLatin1String("QLineEdit {\n"
 "border-radius: 5px\n"
 "\n"
@@ -113,6 +118,7 @@ public:
 
         pushButton = new QPushButton(layoutWidget);
         pushButton->setObjectName(QStringLiteral("pushButton"));
+        pushButton->setFont(font);
         pushButton->setStyleSheet(QLatin1String("QPushButton {\n"
 "\n"
 "}\n"
@@ -123,14 +129,14 @@ public:
         failPassOrNameBox = new QLabel(tarkistaTunnukset);
         failPassOrNameBox->setObjectName(QStringLiteral("failPassOrNameBox"));
         failPassOrNameBox->setGeometry(QRect(170, 30, 171, 81));
-        QFont font2;
-        font2.setFamily(QStringLiteral("Tahoma"));
-        font2.setPointSize(9);
-        font2.setBold(true);
-        font2.setItalic(false);
-        font2.setWeight(75);
-        font2.setStyleStrategy(QFont::PreferAntialias);
-        failPassOrNameBox->setFont(font2);
+        QFont font3;
+        font3.setFamily(QStringLiteral("Verdana"));
+        font3.setPointSize(9);
+        font3.setBold(true);
+        font3.setItalic(false);
+        font3.setWeight(75);
+        font3.setStyleStrategy(QFont::PreferAntialias);
+        failPassOrNameBox->setFont(font3);
         failPassOrNameBox->setStyleSheet(QLatin1String("QLabel {\n"
 "background-color:\n"
 "	qlineargradient(spread:pad, x1:0.579, y1:0.472, x2:0.0220562, y2:0.949, stop:0 rgba(207, 62, 62, 255), stop:1 rgba(255, 255, 255, 255));\n"

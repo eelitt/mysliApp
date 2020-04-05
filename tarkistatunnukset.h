@@ -41,11 +41,12 @@ private:
     Ui::tarkistaTunnukset *ui;
     bool identification = false;
     QSqlTableModel *model;
-    void hideContextMenus();
+    void setupUi();
     void setUsedSqlTableModel(const QString &tablename);
     void setupInfoBoxes();
     void connects();
     void failInfoBoxAnimations(QLabel *Label);
+    void setBackground();
 
 
 };

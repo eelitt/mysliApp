@@ -47,12 +47,17 @@
      <height>92</height>
     </rect>
    </property>
+   <property name="font">
+    <font>
+     <family>Verdana</family>
+    </font>
+   </property>
    <layout class="QGridLayout" name="gridLayout">
     <item row="0" column="1" alignment="Qt::AlignHCenter">
      <widget class="QLabel" name="label">
       <property name="font">
        <font>
-        <family>Tahoma</family>
+        <family>Verdana</family>
         <pointsize>12</pointsize>
         <weight>75</weight>
         <italic>false</italic>
@@ -68,7 +73,7 @@
      <widget class="QLabel" name="label_2">
       <property name="font">
        <font>
-        <family>Tahoma</family>
+        <family>Verdana</family>
         <pointsize>8</pointsize>
         <weight>75</weight>
         <bold>true</bold>
@@ -81,6 +86,11 @@
     </item>
     <item row="1" column="1">
      <widget class="QLineEdit" name="tunnusLaatikko">
+      <property name="font">
+       <font>
+        <family>Verdana</family>
+       </font>
+      </property>
       <property name="styleSheet">
        <string notr="true">QLineEdit {
 border-radius: 5px;
@@ -93,7 +103,7 @@ border-radius: 5px;
      <widget class="QLabel" name="label_3">
       <property name="font">
        <font>
-        <family>Tahoma</family>
+        <family>Verdana</family>
         <pointsize>8</pointsize>
         <weight>75</weight>
         <bold>true</bold>
@@ -112,6 +122,11 @@ border-radius: 5px;
         <verstretch>0</verstretch>
        </sizepolicy>
       </property>
+      <property name="font">
+       <font>
+        <family>Verdana</family>
+       </font>
+      </property>
       <property name="styleSheet">
        <string notr="true">QLineEdit {
 border-radius: 5px
@@ -125,6 +140,11 @@ border-radius: 5px
     </item>
     <item row="3" column="1">
      <widget class="QPushButton" name="pushButton">
+      <property name="font">
+       <font>
+        <family>Verdana</family>
+       </font>
+      </property>
       <property name="styleSheet">
        <string notr="true">QPushButton {
 
@@ -149,7 +169,7 @@ border-radius: 5px
    </property>
    <property name="font">
     <font>
-     <family>Tahoma</family>
+     <family>Verdana</family>
      <pointsize>9</pointsize>
      <weight>75</weight>
      <italic>false</italic>

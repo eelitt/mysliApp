@@ -5,49 +5,27 @@ tarkistaTunnukset::tarkistaTunnukset(const QString &tablename, QWidget *parent) 
     QDialog(parent),
     ui(new Ui::tarkistaTunnukset)
 {
-    ui->setupUi(this);
 
-    hideContextMenus();
-   setUsedSqlTableModel(tablename);
-   setupInfoBoxes();
+    setupUi();
 
-
+    setUsedSqlTableModel(tablename);
+    setupInfoBoxes();
+    setBackground();
     connects();
-
-
-
-
-    //    QPixmap bkgnd(":/resurssit/karsamakivaakuna.jpg");
-
-
-    /*QPalette pal = palette();
-    pal.setColor(QPalette::Window, Qt::black);
-    this->setAutoFillBackground(true);
-    this->setPalette(pal);
-
-    //resize(bkgnd.size());
-
-    bkgnd.size
-
-    QPalette gndPalette;
-    gndPalette.setBrush(QPalette::Window, bkgnd);
-
-    this->setPalette(gndPalette);*/
-
-
 
 }
 
 tarkistaTunnukset::~tarkistaTunnukset()
 {
-   delete ui;
-   delete model;
+    delete ui;
+    delete model;
 
 }
-void tarkistaTunnukset::hideContextMenus()
+void tarkistaTunnukset::setupUi()
 {
+    ui->setupUi(this);
     setWindowFlags(windowFlags() & (~Qt::WindowContextHelpButtonHint));
-     windowFlags();
+
 }
 void tarkistaTunnukset::setUsedSqlTableModel(const QString &tablename)
 {
@@ -78,7 +56,7 @@ void tarkistaTunnukset::haeTunnukset(QString &tunnus, QString &salasana)
             break;
         }else
         {
-
+            failInfoBoxAnimations(ui->failPassOrNameBox);
         }
     }
 
@@ -97,7 +75,7 @@ void tarkistaTunnukset::haeTunnukset(QString &tunnus, QString &salasana)
             break;
         }else
         {
-    failInfoBoxAnimations(ui->failPassOrNameBox);
+            failInfoBoxAnimations(ui->failPassOrNameBox);
 
 
         }
@@ -140,7 +118,7 @@ bool tarkistaTunnukset::getIdentification() const
 void tarkistaTunnukset::connects()
 {
 
-     this->connect(this, SIGNAL(tunnusHaku(QString&,QString&)), this, SLOT(haeTunnukset(QString&, QString&)));
+    this->connect(this, SIGNAL(tunnusHaku(QString&,QString&)), this, SLOT(haeTunnukset(QString&, QString&)));
 }
 void tarkistaTunnukset::setupInfoBoxes()
 {
@@ -161,5 +139,29 @@ void tarkistaTunnukset::failInfoBoxAnimations(QLabel *Label)
     endAnim->setEasingCurve(QEasingCurve::OutQuad);
     connect(endAnim, &QPropertyAnimation::finished,[=](){});
     endAnim->start(QAbstractAnimation::DeleteWhenStopped);
+
+}
+
+void tarkistaTunnukset::setBackground()
+{
+
+    //    QPixmap bkgnd(":/resurssit/karsamakivaakuna.jpg");
+
+
+    /*QPalette pal = palette();
+    pal.setColor(QPalette::Window, Qt::black);
+    this->setAutoFillBackground(true);
+    this->setPalette(pal);
+
+    //resize(bkgnd.size());
+
+    bkgnd.size
+
+    QPalette gndPalette;
+    gndPalette.setBrush(QPalette::Window, bkgnd);
+
+    this->setPalette(gndPalette);*/
+
+
 
 }

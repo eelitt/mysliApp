@@ -41,14 +41,15 @@ void lisaaTietokantaan();
 
 private slots:
 
-    void submit();
+    void submitDataToDatabase();
     void removeRow();
     void search();
     void revertAll();
-    void add();
+    void addDataToDatabase();
     void aseta(QString&, QString&, QString&, QString&, QString&, bool&);
-private:
 
+private:
+        void setupWindowIcon(QDialog*);
         void connectFunctions();
         void showDatabase(QSqlTableModel *);
         void setSqlTableModel(const QString &);

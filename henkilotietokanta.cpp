@@ -47,6 +47,7 @@ henkiloTietokanta::~henkiloTietokanta()
 void henkiloTietokanta::mainWindowSetup()
 {
 
+    setFont(QFont("Verdana", 8));
     resize(490, 400);
     setWindowTitle(tr("Henkilötietokanta"));
     QPixmap pixMapIcon(":/resurssit/karsamakivaakuna.jpg");
@@ -62,6 +63,7 @@ void henkiloTietokanta::setSqlTableModel(const QString &tablename)
     model->setEditStrategy(QSqlTableModel::OnManualSubmit);
     model->select();
 
+
     std::string str1 = model->record().fieldName(0).toStdString();
     const char *lohko = str1.c_str();
     std::string str2 = model->record().fieldName(1).toStdString();
@@ -73,14 +75,14 @@ void henkiloTietokanta::setSqlTableModel(const QString &tablename)
     std::string str5 = model->record().fieldName(4).toStdString();
     const char *sukunimi = str5.c_str();
     std::string str6 = model->record().fieldName(5).toStdString();
-    const char *burialmethod = str6.c_str();
+    const char *hautaustapa = str6.c_str();
 
     model->setHeaderData(0, Qt::Horizontal, tr(lohko));
     model->setHeaderData(1, Qt::Horizontal, tr(rivi));
     model->setHeaderData(2, Qt::Horizontal, tr(paikka));
     model->setHeaderData(3, Qt::Horizontal, tr(etunimi));
     model->setHeaderData(4, Qt::Horizontal, tr(sukunimi));
-    model->setHeaderData(5, Qt::Horizontal, tr(burialmethod));
+    model->setHeaderData(5, Qt::Horizontal, tr(hautaustapa));
 
 }
 void henkiloTietokanta::showDatabase(QSqlTableModel *modeli)
@@ -91,6 +93,7 @@ void henkiloTietokanta::showDatabase(QSqlTableModel *modeli)
     view->resizeColumnsToContents();
     view->resizeRowsToContents();
     view->setSortingEnabled(true);
+    view->setFont(QFont("Verdana", 7));
 
 
 
@@ -117,9 +120,9 @@ void henkiloTietokanta::createButtons()
     submitButton = new QPushButton(tr("tallenna muutokset"));
     lisaaIhminenButton->setDefault(true);
     etsiButton = new QPushButton(tr(""));
-    //etsiButton->setStyleSheet("background: white; ");
+
     removeRowButton = new QPushButton(tr(""));
-    revertButton = new QPushButton(tr("&revert"));
+    revertButton = new QPushButton(tr("&Palauta muutokset"));
 
 
     buttonBox = new QDialogButtonBox(Qt::Vertical);
@@ -134,8 +137,8 @@ void henkiloTietokanta::createButtons()
     setButtonIcons();
 
     connect(etsiButton, &QPushButton::clicked, this, &henkiloTietokanta::search);
-    connect(lisaaIhminenButton, &QPushButton::clicked,this, &henkiloTietokanta::add);
-    connect(submitButton, &QPushButton::clicked, this, &henkiloTietokanta::submit);
+    connect(lisaaIhminenButton, &QPushButton::clicked,this, &henkiloTietokanta::addDataToDatabase);
+    connect(submitButton, &QPushButton::clicked, this, &henkiloTietokanta::submitDataToDatabase);
     connect(removeRowButton, &QPushButton::clicked, this, &henkiloTietokanta::removeRow);
     connect(revertButton, &QPushButton::clicked,  this, &henkiloTietokanta::revertAll);
 
@@ -162,7 +165,7 @@ void henkiloTietokanta::setButtonIcons()
 
 }
 
-void henkiloTietokanta::submit()
+void henkiloTietokanta::submitDataToDatabase()
 
 {
 
@@ -217,28 +220,42 @@ void henkiloTietokanta::createMenuActions()
 void henkiloTietokanta::removeRow()
 
 {
-
+    QMessageBox *msgBoxPtr;
+    msgBoxPtr = &msgBox;
+    setupWindowIcon(msgBoxPtr);
+    msgBox.setFont(QFont("Verdana",8));
+    msgBox.setWindowTitle("Poista");
     QModelIndex index;
-
     QModelIndexList indexes = view->selectionModel()->selectedIndexes();
 
-    for(int i = 0; i < indexes.count(); i++)
+    if(indexes.count() != 0)
     {
-        index = indexes.at(i);
+    switch(indexes.count())
+    {
 
-    }
-
+    case 1:
 
     msgBox.setText("Oot poistamassa henkilöä tietokannasta.");
     msgBox.setInformativeText("Ootko varma?");
+        break;
+
+    default:
+        msgBox.setText("Oot poistamassa henkilöitä tietokannasta.");
+        msgBox.setInformativeText("Ootko varma?");
+    }
 
     QPushButton *yesButton = msgBox.addButton(tr("kyllä"), QMessageBox::ActionRole);
     QPushButton *backButton = msgBox.addButton(tr("takaisin"), QMessageBox::RejectRole);
     msgBox.exec();
     if(msgBox.clickedButton() == yesButton)
     {
-        model->removeRow(index.row());
-        model->submitAll();
+        for(int j = 0; j <indexes.count(); j++)
+        {
+            index = indexes.at(j);
+            model->removeRow(index.row());
+            model->submitAll();
+        }
+
     }
     else if(msgBox.clickedButton() == backButton)
     {
@@ -249,6 +266,9 @@ void henkiloTietokanta::removeRow()
 
     delete yesButton;
     delete backButton;
+
+    }
+
 }
 
 void henkiloTietokanta::search()
@@ -257,10 +277,12 @@ void henkiloTietokanta::search()
     QInputDialog *inputDialog = new QInputDialog;
 
     QString text;
-    inputDialog->setWindowFlags(inputDialog->windowFlags() & (~Qt::WindowContextHelpButtonHint));
-    inputDialog->setWindowTitle("Etsi");
 
-    inputDialog->setLabelText("Anna etsittava arvo");
+    setupWindowIcon(inputDialog);
+    inputDialog->setFont(QFont("Verdana", 8));
+    inputDialog->setWindowFlags(inputDialog->windowFlags() & (~Qt::WindowContextHelpButtonHint));
+    inputDialog->setWindowTitle("Etsi");    
+    inputDialog->setLabelText("Anna etsittävä arvo");
     inputDialog->setOkButtonText("Etsi");
     inputDialog->setCancelButtonText("Takaisin");
     inputDialog->exec();
@@ -272,21 +294,21 @@ void henkiloTietokanta::search()
         for(int i = 0; i < model->rowCount(); i++)
         {
 
-            if(model->record(i).value("Lohko") != text ||
-                    model->record(i).value("Rivi") != text ||
-                    model->record(i).value("Paikka") != text ||
-                    model->record(i).value("Etunimi") != text ||
-                    model->record(i).value("Sukunimi") != text ||
-                    model->record(i).value("Hautaustapa") != text)
+            if(model->record(i).value(model->record().fieldName(0)) != text ||
+                    model->record(i).value(model->record().fieldName(1)) != text ||
+                    model->record(i).value(model->record().fieldName(2)) != text ||
+                    model->record(i).value(model->record().fieldName(3)) != text ||
+                    model->record(i).value(model->record().fieldName(4)) != text ||
+                    model->record(i).value(model->record().fieldName(5)) != text)
             {
                 view->hideRow(i);
             }
-            if(model->record(i).value("Lohko") == text ||
-                    model->record(i).value("Rivi") == text ||
-                    model->record(i).value("Paikka") == text ||
-                    model->record(i).value("Etunimi") == text ||
-                    model->record(i).value("Sukunimi") == text ||
-                    model->record(i).value("Hautaustapa") == text)
+            if(model->record(i).value(model->record().fieldName(0)) == text ||
+                    model->record(i).value(model->record().fieldName(1)) == text ||
+                    model->record(i).value(model->record().fieldName(2)) == text ||
+                    model->record(i).value(model->record().fieldName(3)) == text ||
+                    model->record(i).value(model->record().fieldName(4)) == text ||
+                    model->record(i).value(model->record().fieldName(5)) == text)
             {
                 view->showRow(i);
             }
@@ -295,7 +317,7 @@ void henkiloTietokanta::search()
     delete inputDialog;
 
 }
-void henkiloTietokanta::add()
+void henkiloTietokanta::addDataToDatabase()
 {
 
     addPtr->show();
@@ -311,7 +333,7 @@ void henkiloTietokanta::aseta(QString &stretu, QString &strSuku, QString &lohkoN
     */
     for(int i = 0;i < model->rowCount(); i++)
     {
-        if(model->record(i).value("Rivi") == riviNum && model->record(i).value("Paikka") == paikkaNum)
+        if(model->record(i).value(model->record().fieldName(1)) == riviNum && model->record(i).value(model->record().fieldName(2)) == paikkaNum)
         {
             QMessageBox::information(this, tr("Huomio"),tr("tarkista, onko samalla rivilla ja paikalla jo henkilo."));
             teeRecord = false;
@@ -327,22 +349,22 @@ void henkiloTietokanta::aseta(QString &stretu, QString &strSuku, QString &lohkoN
     {
 
         QSqlRecord newRecord = model->record();
-        newRecord.setValue("lohko", lohkoN);
-        newRecord.setValue("Rivi", riviNum);
-        newRecord.setValue("Paikka", paikkaNum);
-        newRecord.setValue("Etunimi", stretu);
-        newRecord.setValue("Sukunimi", strSuku);
+        newRecord.setValue(newRecord.fieldName(0), lohkoN);
+        newRecord.setValue(newRecord.fieldName(1), riviNum);
+        newRecord.setValue(newRecord.fieldName(2), paikkaNum);
+        newRecord.setValue(newRecord.fieldName(3), stretu);
+        newRecord.setValue(newRecord.fieldName(4), strSuku);
 
         if(arkku)
         {
             QString metodi = "Arkku";
-            newRecord.setValue("hautaustapa", metodi);
+            newRecord.setValue(newRecord.fieldName(5), metodi);
 
         }
         else
         {
             QString uurna = "Uurna";
-            newRecord.setValue("hautaustapa", uurna);
+            newRecord.setValue(newRecord.fieldName(5), uurna);
 
         }
         model->insertRecord(model->rowCount(), newRecord);
@@ -354,7 +376,7 @@ void henkiloTietokanta::aseta(QString &stretu, QString &strSuku, QString &lohkoN
 void henkiloTietokanta::connectFunctions()
 {
     //add-window connects
-    connect(this, SIGNAL(lisaaTietokantaan()), this, SLOT(submit()));
+    connect(this, SIGNAL(lisaaTietokantaan()), this, SLOT(submitDataToDatabase()));
     connect(addPtr,SIGNAL(lahetaHenkilo(QString&, QString&, QString&, QString&, QString&, bool&)),this, SLOT(aseta(QString&, QString&, QString&,QString&, QString&, bool&)));
 
 }
@@ -379,12 +401,12 @@ void henkiloTietokanta::saveToExcel()
 
         for(int i = 0; i <model->rowCount(); i++)
         {
-            output        << model->record(i).value("Lohko").toInt()
-                          << ";" << model->record(i).value("Rivi").toInt()
-                          << ";" << model->record(i).value("Paikka").toInt()
-                          << ";" << model->record(i).value("firstname").toString()
-                          << ";" << model->record(i).value("lastname").toString()
-                          << ";" << model->record(i).value("burialmethod").toString()
+            output        << model->record(i).value(model->record().fieldName(0)).toInt()
+                          << ";" << model->record(i).value(model->record().fieldName(1)).toInt()
+                          << ";" << model->record(i).value(model->record().fieldName(2)).toInt()
+                          << ";" << model->record(i).value(model->record().fieldName(3)).toString()
+                          << ";" << model->record(i).value(model->record().fieldName(4)).toString()
+                          << ";" << model->record(i).value(model->record().fieldName(5)).toString()
                           << endl;
         }
 
@@ -393,5 +415,12 @@ void henkiloTietokanta::saveToExcel()
     data.close();
 }
 
+void henkiloTietokanta::setupWindowIcon(QDialog *windowPtr)
+{
+    QPixmap pixmap(":/resurssit/karsamakivaakuna.jpg");
+    QIcon searchWindowIcon(pixmap);
 
+   windowPtr->setWindowIcon(searchWindowIcon);
+
+}
 
