@@ -50,9 +50,12 @@ public:
         if (addDialog->objectName().isEmpty())
             addDialog->setObjectName(QStringLiteral("addDialog"));
         addDialog->resize(518, 366);
+        addDialog->setStyleSheet(QLatin1String("QDialog {\n"
+"background-color: qconicalgradient(cx:0, cy:1, angle:348.3, stop:0 rgba(115, 109, 108, 255), stop:1 rgba(255, 255, 255, 255))\n"
+"}"));
         lahetaNappi = new QPushButton(addDialog);
         lahetaNappi->setObjectName(QStringLiteral("lahetaNappi"));
-        lahetaNappi->setGeometry(QRect(40, 250, 441, 81));
+        lahetaNappi->setGeometry(QRect(40, 210, 441, 81));
         QFont font;
         font.setFamily(QStringLiteral("Verdana"));
         font.setPointSize(10);
@@ -65,7 +68,7 @@ public:
         lahetaNappi->setFocusPolicy(Qt::StrongFocus);
         layoutWidget = new QWidget(addDialog);
         layoutWidget->setObjectName(QStringLiteral("layoutWidget"));
-        layoutWidget->setGeometry(QRect(100, 80, 314, 145));
+        layoutWidget->setGeometry(QRect(100, 40, 314, 145));
         QFont font1;
         font1.setFamily(QStringLiteral("Verdana"));
         font1.setBold(false);
@@ -90,6 +93,9 @@ public:
         etuNimiLaatikko = new QLineEdit(layoutWidget);
         etuNimiLaatikko->setObjectName(QStringLiteral("etuNimiLaatikko"));
         etuNimiLaatikko->setFont(font1);
+        etuNimiLaatikko->setStyleSheet(QLatin1String("QLineEdit {\n"
+"border-radius: 4px;\n"
+"}"));
 
         gridLayout->addWidget(etuNimiLaatikko, 1, 0, 1, 2);
 
@@ -102,18 +108,27 @@ public:
         sukunimiLaatikko = new QLineEdit(layoutWidget);
         sukunimiLaatikko->setObjectName(QStringLiteral("sukunimiLaatikko"));
         sukunimiLaatikko->setFont(font1);
+        sukunimiLaatikko->setStyleSheet(QLatin1String("QLineEdit {\n"
+"border-radius: 4px;\n"
+"}"));
 
         gridLayout->addWidget(sukunimiLaatikko, 3, 0, 1, 2);
 
         lohkoLaatikko = new QLineEdit(layoutWidget);
         lohkoLaatikko->setObjectName(QStringLiteral("lohkoLaatikko"));
         lohkoLaatikko->setFont(font1);
+        lohkoLaatikko->setStyleSheet(QLatin1String("QLineEdit {\n"
+"border-radius: 4px;\n"
+"}"));
 
         gridLayout->addWidget(lohkoLaatikko, 1, 2, 1, 1);
 
         paikkaLaatikko = new QLineEdit(layoutWidget);
         paikkaLaatikko->setObjectName(QStringLiteral("paikkaLaatikko"));
         paikkaLaatikko->setFont(font1);
+        paikkaLaatikko->setStyleSheet(QLatin1String("QLineEdit {\n"
+"border-radius: 4px;\n"
+"}"));
 
         gridLayout->addWidget(paikkaLaatikko, 5, 2, 1, 1);
 
@@ -138,6 +153,9 @@ public:
         riviLaatikko = new QLineEdit(layoutWidget);
         riviLaatikko->setObjectName(QStringLiteral("riviLaatikko"));
         riviLaatikko->setFont(font1);
+        riviLaatikko->setStyleSheet(QLatin1String("QLineEdit {\n"
+"border-radius: 4px;\n"
+"}"));
 
         gridLayout->addWidget(riviLaatikko, 3, 2, 1, 1);
 
@@ -157,6 +175,7 @@ public:
         tyhjennaNappi->setObjectName(QStringLiteral("tyhjennaNappi"));
         tyhjennaNappi->setFont(font1);
         tyhjennaNappi->setFocusPolicy(Qt::ClickFocus);
+        tyhjennaNappi->setStyleSheet(QStringLiteral(""));
 
         gridLayout->addWidget(tyhjennaNappi, 3, 3, 1, 1);
 

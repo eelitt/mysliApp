@@ -24,6 +24,7 @@ henkiloTietokanta::henkiloTietokanta(const QString &tablename, QWidget *parent) 
     connectFunctions();
 
     setMainlayout();
+    setStyleSheets();
 
 }
 
@@ -64,6 +65,7 @@ void henkiloTietokanta::setSqlTableModel(const QString &tablename)
     model->select();
 
 
+
     std::string str1 = model->record().fieldName(0).toStdString();
     const char *lohko = str1.c_str();
     std::string str2 = model->record().fieldName(1).toStdString();
@@ -98,6 +100,7 @@ void henkiloTietokanta::showDatabase(QSqlTableModel *modeli)
 
 
 
+
 }
 
 void henkiloTietokanta::setMainlayout()
@@ -108,8 +111,22 @@ void henkiloTietokanta::setMainlayout()
     mainLayout->setMenuBar(menuPalkki);
     mainLayout->addWidget(view);
     mainLayout->addWidget(buttonBox);
+
+
     setLayout(mainLayout);
 
+
+}
+void henkiloTietokanta::setStyleSheets()
+{
+    menuPalkki->setObjectName("menu");
+
+    setObjectName("pohjamaali");
+
+    setStyleSheet("QWidget#pohjamaali {background-color: qconicalgradient(cx:0, cy:1, angle:348.3, stop:0 rgba(115, 109, 108, 255), stop:1 rgba(255, 255, 255, 255));}");
+    menuPalkki->setStyleSheet("#menu {background-color: qconicalgradient(cx:0, cy:1, angle:348.3, stop:0 rgba(115, 109, 108, 255), stop:1 rgba(255, 255, 255, 255));}");
+    view->setStyleSheet("QHeaderView::section{background-color: qconicalgradient(cx:0, cy:1, angle:348.3, stop:0 rgba(115, 109, 108, 255), stop:1 rgba(255, 255, 255, 255))}");
+        //vastavaribackground-color: qconicalgradient(cx:0, cy:1, angle:348.3, stop:0 rgba(232, 180, 171, 255), stop:1 rgba(255, 255, 255, 255));
 }
 
 void henkiloTietokanta::createButtons()
@@ -159,7 +176,7 @@ void henkiloTietokanta::setButtonIcons()
     QIcon buttonIcon2(pixmap2);
 
     etsiButton->setIcon(buttonIcon2);
-    //etsiButton->setIconSize(pixmap2.rect().size());
+
 
 
 
@@ -223,6 +240,9 @@ void henkiloTietokanta::removeRow()
     QMessageBox *msgBoxPtr;
     msgBoxPtr = &msgBox;
     setupWindowIcon(msgBoxPtr);
+    msgBox.setObjectName("boxi");
+    msgBox.setStyleSheet("#boxi {background-color:qconicalgradient(cx:0, cy:1, angle:348.3, stop:0 rgba(115, 109, 108, 255), stop:1 rgba(255, 255, 255, 255));}");
+
     msgBox.setFont(QFont("Verdana",8));
     msgBox.setWindowTitle("Poista");
     QModelIndex index;
@@ -245,6 +265,7 @@ void henkiloTietokanta::removeRow()
     }
 
     QPushButton *yesButton = msgBox.addButton(tr("kyllä"), QMessageBox::ActionRole);
+
     QPushButton *backButton = msgBox.addButton(tr("takaisin"), QMessageBox::RejectRole);
     msgBox.exec();
     if(msgBox.clickedButton() == yesButton)
@@ -279,6 +300,8 @@ void henkiloTietokanta::search()
     QString text;
 
     setupWindowIcon(inputDialog);
+    inputDialog->setObjectName("etsilaatikko");
+    inputDialog->setStyleSheet("#etsilaatikko {background-color: qconicalgradient(cx:0, cy:1, angle:348.3, stop:0 rgba(115, 109, 108, 255), stop:1 rgba(255, 255, 255, 255));}");
     inputDialog->setFont(QFont("Verdana", 8));
     inputDialog->setWindowFlags(inputDialog->windowFlags() & (~Qt::WindowContextHelpButtonHint));
     inputDialog->setWindowTitle("Etsi");    

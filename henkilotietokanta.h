@@ -60,6 +60,7 @@ private:
         void createMenu();
         void createMenuActions();
         void saveToExcel();
+        void setStyleSheets();
         QPushButton *lisaaIhminenButton;
         QPushButton *submitButton;
         QPushButton *revertButton;
