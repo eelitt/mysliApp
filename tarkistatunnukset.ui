@@ -36,7 +36,9 @@
     <normaloff>resurssit/karsamakivaakuna.jpg</normaloff>resurssit/karsamakivaakuna.jpg</iconset>
   </property>
   <property name="styleSheet">
-   <string notr="true"/>
+   <string notr="true">QDialog {
+background-color: qconicalgradient(cx:0, cy:1, angle:348.3, stop:0 rgba(115, 109, 108, 255), stop:1 rgba(255, 255, 255, 255))
+}</string>
   </property>
   <widget class="QWidget" name="layoutWidget">
    <property name="geometry">
@@ -161,9 +163,9 @@ border-radius: 5px
   <widget class="QLabel" name="failPassOrNameBox">
    <property name="geometry">
     <rect>
-     <x>170</x>
+     <x>160</x>
      <y>30</y>
-     <width>171</width>
+     <width>181</width>
      <height>81</height>
     </rect>
    </property>

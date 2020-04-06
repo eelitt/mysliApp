@@ -51,7 +51,9 @@ public:
         QIcon icon;
         icon.addFile(QStringLiteral("resurssit/karsamakivaakuna.jpg"), QSize(), QIcon::Normal, QIcon::Off);
         tarkistaTunnukset->setWindowIcon(icon);
-        tarkistaTunnukset->setStyleSheet(QStringLiteral(""));
+        tarkistaTunnukset->setStyleSheet(QLatin1String("QDialog {\n"
+"background-color: qconicalgradient(cx:0, cy:1, angle:348.3, stop:0 rgba(115, 109, 108, 255), stop:1 rgba(255, 255, 255, 255))\n"
+"}"));
         layoutWidget = new QWidget(tarkistaTunnukset);
         layoutWidget->setObjectName(QStringLiteral("layoutWidget"));
         layoutWidget->setGeometry(QRect(141, 121, 165, 92));
@@ -128,7 +130,7 @@ public:
 
         failPassOrNameBox = new QLabel(tarkistaTunnukset);
         failPassOrNameBox->setObjectName(QStringLiteral("failPassOrNameBox"));
-        failPassOrNameBox->setGeometry(QRect(170, 30, 171, 81));
+        failPassOrNameBox->setGeometry(QRect(160, 30, 181, 81));
         QFont font3;
         font3.setFamily(QStringLiteral("Verdana"));
         font3.setPointSize(9);

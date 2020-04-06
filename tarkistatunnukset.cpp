@@ -47,7 +47,7 @@ void tarkistaTunnukset::haeTunnukset(QString &tunnus, QString &salasana)
 
         QSqlRecord record = model->record(i);
 
-        QString accountName = record.value("kayttaja").toString();
+        QString accountName = model->record(i).value(model->record().fieldName(1)).toString();
 
         if(tunnus == accountName)
         {
@@ -65,7 +65,7 @@ void tarkistaTunnukset::haeTunnukset(QString &tunnus, QString &salasana)
 
         QSqlRecord record = model->record(j);
 
-        QString password = record.value("salasana").toString();
+        QString password = model->record(j).value(model->record().fieldName(2)).toString();
 
 
         if(salasana == password)
@@ -82,7 +82,7 @@ void tarkistaTunnukset::haeTunnukset(QString &tunnus, QString &salasana)
 
     }
 
-    if(nameTest == true && passwordTest == true)
+    if(nameTest && passwordTest)
     {
         identification = true;
 
@@ -90,7 +90,7 @@ void tarkistaTunnukset::haeTunnukset(QString &tunnus, QString &salasana)
     }
     else
     {
-        qDebug() << "haista paska";
+
     }
 
 
@@ -133,7 +133,7 @@ void tarkistaTunnukset::failInfoBoxAnimations(QLabel *Label)
     QGraphicsOpacityEffect *endEffect = new QGraphicsOpacityEffect();
     Label->setGraphicsEffect(endEffect);
     QPropertyAnimation *endAnim = new QPropertyAnimation(endEffect, "opacity");
-    endAnim->setDuration(2500);
+    endAnim->setDuration(3500);
     endAnim->setStartValue(Label->windowOpacity());
     endAnim->setEndValue(0.0);
     endAnim->setEasingCurve(QEasingCurve::OutQuad);

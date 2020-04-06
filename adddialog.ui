@@ -13,11 +13,16 @@
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
+  <property name="styleSheet">
+   <string notr="true">QDialog {
+background-color: qconicalgradient(cx:0, cy:1, angle:348.3, stop:0 rgba(115, 109, 108, 255), stop:1 rgba(255, 255, 255, 255))
+}</string>
+  </property>
   <widget class="QPushButton" name="lahetaNappi">
    <property name="geometry">
     <rect>
      <x>40</x>
-     <y>250</y>
+     <y>210</y>
      <width>441</width>
      <height>81</height>
     </rect>
@@ -46,7 +51,7 @@
    <property name="geometry">
     <rect>
      <x>100</x>
-     <y>80</y>
+     <y>40</y>
      <width>314</width>
      <height>145</height>
     </rect>
@@ -100,6 +105,11 @@
         <stylestrategy>PreferAntialias</stylestrategy>
        </font>
       </property>
+      <property name="styleSheet">
+       <string notr="true">QLineEdit {
+border-radius: 4px;
+}</string>
+      </property>
      </widget>
     </item>
     <item row="2" column="2">
@@ -127,6 +137,11 @@
         <stylestrategy>PreferAntialias</stylestrategy>
        </font>
       </property>
+      <property name="styleSheet">
+       <string notr="true">QLineEdit {
+border-radius: 4px;
+}</string>
+      </property>
      </widget>
     </item>
     <item row="1" column="2">
@@ -139,6 +154,11 @@
         <stylestrategy>PreferAntialias</stylestrategy>
        </font>
       </property>
+      <property name="styleSheet">
+       <string notr="true">QLineEdit {
+border-radius: 4px;
+}</string>
+      </property>
      </widget>
     </item>
     <item row="5" column="2">
@@ -150,6 +170,11 @@
         <bold>false</bold>
         <stylestrategy>PreferAntialias</stylestrategy>
        </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QLineEdit {
+border-radius: 4px;
+}</string>
       </property>
      </widget>
     </item>
@@ -208,6 +233,11 @@
         <stylestrategy>PreferAntialias</stylestrategy>
        </font>
       </property>
+      <property name="styleSheet">
+       <string notr="true">QLineEdit {
+border-radius: 4px;
+}</string>
+      </property>
      </widget>
     </item>
     <item row="4" column="2">
@@ -252,6 +282,9 @@
       </property>
       <property name="focusPolicy">
        <enum>Qt::ClickFocus</enum>
+      </property>
+      <property name="styleSheet">
+       <string notr="true"/>
       </property>
       <property name="text">
        <string>Tyhjennä</string>
