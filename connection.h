@@ -12,10 +12,10 @@ static bool createConnection()
 
       QSqlDatabase db = QSqlDatabase::addDatabase("QMYSQL");
 
-       db.setHostName("127.0.0.1");
+       db.setHostName(" ");
        db.setDatabaseName("henkilotietokanta");
-       db.setUserName("normaluser");
-       db.setPassword("esko");
+       db.setUserName("*******");
+       db.setPassword("*****");
        bool okay = db.open();
        qDebug() << "hei" << okay;
        if (!okay) {
