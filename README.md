@@ -1,2 +1,3 @@
 # mysliApp
-learning project about mysql and GUIs.
+learning project about QT, mysql and GUIs.
+
