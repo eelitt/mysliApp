@@ -49,6 +49,7 @@ private slots:
     void aseta(QString&, QString&, QString&, QString&, QString&, bool&);
 
 private:
+        int rowCountForExcel;
         void setupWindowIcon(QDialog*);
         void connectFunctions();
         void showDatabase(QSqlTableModel *);

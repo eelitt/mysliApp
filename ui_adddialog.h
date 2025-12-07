@@ -20,6 +20,7 @@
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QLineEdit>
 #include <QtWidgets/QPushButton>
+#include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
 
 QT_BEGIN_NAMESPACE
@@ -30,7 +31,6 @@ public:
     QPushButton *lahetaNappi;
     QWidget *layoutWidget;
     QGridLayout *gridLayout;
-    QCheckBox *uurnaBox;
     QLabel *counterLaatikko;
     QLineEdit *etuNimiLaatikko;
     QLabel *riviLappu;
@@ -42,8 +42,13 @@ public:
     QLabel *lohkolappu;
     QLineEdit *riviLaatikko;
     QLabel *paikkaLAppu;
-    QCheckBox *arkkuBox;
     QPushButton *tyhjennaNappi;
+    QCheckBox *uurnaBox;
+    QCheckBox *arkkuBox;
+    QWidget *layoutWidget1;
+    QVBoxLayout *verticalLayout;
+    QLabel *lisatietoLappu;
+    QLineEdit *lisatietoLaatikko;
 
     void setupUi(QDialog *addDialog)
     {
@@ -55,7 +60,7 @@ public:
 "}"));
         lahetaNappi = new QPushButton(addDialog);
         lahetaNappi->setObjectName(QStringLiteral("lahetaNappi"));
-        lahetaNappi->setGeometry(QRect(40, 210, 441, 81));
+        lahetaNappi->setGeometry(QRect(40, 270, 441, 81));
         QFont font;
         font.setFamily(QStringLiteral("Verdana"));
         font.setPointSize(10);
@@ -78,12 +83,6 @@ public:
         gridLayout = new QGridLayout(layoutWidget);
         gridLayout->setObjectName(QStringLiteral("gridLayout"));
         gridLayout->setContentsMargins(0, 0, 0, 0);
-        uurnaBox = new QCheckBox(layoutWidget);
-        uurnaBox->setObjectName(QStringLiteral("uurnaBox"));
-        uurnaBox->setFont(font1);
-
-        gridLayout->addWidget(uurnaBox, 5, 1, 1, 1);
-
         counterLaatikko = new QLabel(layoutWidget);
         counterLaatikko->setObjectName(QStringLiteral("counterLaatikko"));
         counterLaatikko->setFont(font1);
@@ -165,12 +164,6 @@ public:
 
         gridLayout->addWidget(paikkaLAppu, 4, 2, 1, 1);
 
-        arkkuBox = new QCheckBox(layoutWidget);
-        arkkuBox->setObjectName(QStringLiteral("arkkuBox"));
-        arkkuBox->setFont(font1);
-
-        gridLayout->addWidget(arkkuBox, 5, 0, 1, 1);
-
         tyhjennaNappi = new QPushButton(layoutWidget);
         tyhjennaNappi->setObjectName(QStringLiteral("tyhjennaNappi"));
         tyhjennaNappi->setFont(font1);
@@ -179,13 +172,47 @@ public:
 
         gridLayout->addWidget(tyhjennaNappi, 3, 3, 1, 1);
 
+        uurnaBox = new QCheckBox(layoutWidget);
+        uurnaBox->setObjectName(QStringLiteral("uurnaBox"));
+        uurnaBox->setFont(font1);
+
+        gridLayout->addWidget(uurnaBox, 4, 1, 1, 1);
+
+        arkkuBox = new QCheckBox(layoutWidget);
+        arkkuBox->setObjectName(QStringLiteral("arkkuBox"));
+        arkkuBox->setFont(font1);
+
+        gridLayout->addWidget(arkkuBox, 4, 0, 1, 1);
+
+        layoutWidget1 = new QWidget(addDialog);
+        layoutWidget1->setObjectName(QStringLiteral("layoutWidget1"));
+        layoutWidget1->setGeometry(QRect(100, 200, 171, 37));
+        verticalLayout = new QVBoxLayout(layoutWidget1);
+        verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
+        verticalLayout->setContentsMargins(0, 0, 0, 0);
+        lisatietoLappu = new QLabel(layoutWidget1);
+        lisatietoLappu->setObjectName(QStringLiteral("lisatietoLappu"));
+        lisatietoLappu->setFont(font1);
+
+        verticalLayout->addWidget(lisatietoLappu);
+
+        lisatietoLaatikko = new QLineEdit(layoutWidget1);
+        lisatietoLaatikko->setObjectName(QStringLiteral("lisatietoLaatikko"));
+        lisatietoLaatikko->setFont(font1);
+        lisatietoLaatikko->setStyleSheet(QLatin1String("QLineEdit {\n"
+"border-radius: 4px;\n"
+"}"));
+
+        verticalLayout->addWidget(lisatietoLaatikko);
+
         QWidget::setTabOrder(etuNimiLaatikko, sukunimiLaatikko);
         QWidget::setTabOrder(sukunimiLaatikko, lohkoLaatikko);
         QWidget::setTabOrder(lohkoLaatikko, riviLaatikko);
         QWidget::setTabOrder(riviLaatikko, paikkaLaatikko);
-        QWidget::setTabOrder(paikkaLaatikko, lahetaNappi);
-        QWidget::setTabOrder(lahetaNappi, uurnaBox);
-        QWidget::setTabOrder(uurnaBox, arkkuBox);
+        QWidget::setTabOrder(paikkaLaatikko, arkkuBox);
+        QWidget::setTabOrder(arkkuBox, uurnaBox);
+        QWidget::setTabOrder(uurnaBox, lisatietoLaatikko);
+        QWidget::setTabOrder(lisatietoLaatikko, lahetaNappi);
 
         retranslateUi(addDialog);
 
@@ -196,15 +223,17 @@ public:
     {
         addDialog->setWindowTitle(QApplication::translate("addDialog", "Dialog", Q_NULLPTR));
         lahetaNappi->setText(QApplication::translate("addDialog", "lis\303\244\303\244 tietokantaan", Q_NULLPTR));
-        uurnaBox->setText(QApplication::translate("addDialog", "Uurna", Q_NULLPTR));
         counterLaatikko->setText(QString());
         riviLappu->setText(QApplication::translate("addDialog", "Rivi", Q_NULLPTR));
         etulappu->setText(QApplication::translate("addDialog", "etunimi", Q_NULLPTR));
         sukunimilappu->setText(QApplication::translate("addDialog", "Sukunimi", Q_NULLPTR));
         lohkolappu->setText(QApplication::translate("addDialog", "lohko", Q_NULLPTR));
         paikkaLAppu->setText(QApplication::translate("addDialog", "Paikka", Q_NULLPTR));
-        arkkuBox->setText(QApplication::translate("addDialog", "Arkku", Q_NULLPTR));
         tyhjennaNappi->setText(QApplication::translate("addDialog", "Tyhjenn\303\244", Q_NULLPTR));
+        uurnaBox->setText(QApplication::translate("addDialog", "Uurna", Q_NULLPTR));
+        arkkuBox->setText(QApplication::translate("addDialog", "Arkku", Q_NULLPTR));
+        lisatietoLappu->setText(QApplication::translate("addDialog", "lis\303\244tietoa", Q_NULLPTR));
+        lisatietoLaatikko->setText(QString());
     } // retranslateUi
 
 };

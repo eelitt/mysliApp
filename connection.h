@@ -16,10 +16,12 @@ static bool createConnection()
        db.setDatabaseName("henkilotietokanta");
        db.setUserName("normaluser");
        db.setPassword("esko");
+       db.setPort(3306);
+
        bool okay = db.open();
        qDebug() << "hei" << okay;
        if (!okay) {
-
+                db.lastError();
            QMessageBox::critical(nullptr, QObject::tr("Cannot open database1"),
                QObject::tr("unable to establish a database connection.\n"
                            "Click Cancel to exit."), QMessageBox::Cancel);

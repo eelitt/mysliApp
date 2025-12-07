@@ -1,0 +1,12 @@
+INPUT(
+./release\main.o
+./release\mainwindow.o
+./release\adddialog.o
+./release\tarkistatunnukset.o
+./release\henkilotietokanta.o
+./release\qrc_resources.o
+./release\moc_mainwindow.o
+./release\moc_adddialog.o
+./release\moc_tarkistatunnukset.o
+./release\moc_henkilotietokanta.o
+);

@@ -4,11 +4,14 @@
 #include <QDialog>
 #include <QMessageBox>
 #include <QDebug>
+#include <QKeyEvent>
+
+
 
 namespace Ui {
 class addDialog;
 }
-
+class keyEnterReceiver;
 class addDialog : public QDialog
 {
     Q_OBJECT
@@ -35,6 +38,12 @@ private:
     void setupDialogBoxes();
     void setInputTypes();
     void setupUi();
+
+
+
+
+
 };
+
 
 #endif // ADDDIALOG_H

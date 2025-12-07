@@ -49,9 +49,9 @@ void henkiloTietokanta::mainWindowSetup()
 {
 
     setFont(QFont("Verdana", 8));
-    resize(490, 400);
+    resize(535, 400);
     setWindowTitle(tr("Henkilötietokanta"));
-    QPixmap pixMapIcon(":/resurssit/karsamakivaakuna.jpg");
+    QPixmap pixMapIcon(":/resurssit/karsamaensrklogo.jpg");
     QIcon windowIcon(pixMapIcon);
     setWindowIcon(windowIcon);
 
@@ -78,6 +78,8 @@ void henkiloTietokanta::setSqlTableModel(const QString &tablename)
     const char *sukunimi = str5.c_str();
     std::string str6 = model->record().fieldName(5).toStdString();
     const char *hautaustapa = str6.c_str();
+    std::string str7 = model->record().fieldName(6).toStdString();
+    const char *lisatietoja = str7.c_str();
 
     model->setHeaderData(0, Qt::Horizontal, tr(lohko));
     model->setHeaderData(1, Qt::Horizontal, tr(rivi));
@@ -85,6 +87,7 @@ void henkiloTietokanta::setSqlTableModel(const QString &tablename)
     model->setHeaderData(3, Qt::Horizontal, tr(etunimi));
     model->setHeaderData(4, Qt::Horizontal, tr(sukunimi));
     model->setHeaderData(5, Qt::Horizontal, tr(hautaustapa));
+    model->setHeaderData(6, Qt::Horizontal, tr(lisatietoja));
 
 }
 void henkiloTietokanta::showDatabase(QSqlTableModel *modeli)
@@ -126,8 +129,7 @@ void henkiloTietokanta::setStyleSheets()
     setStyleSheet("QWidget#pohjamaali {background-color: qconicalgradient(cx:0, cy:1, angle:348.3, stop:0 rgba(115, 109, 108, 255), stop:1 rgba(255, 255, 255, 255));}");
     menuPalkki->setStyleSheet("#menu {background-color: qconicalgradient(cx:0, cy:1, angle:348.3, stop:0 rgba(115, 109, 108, 255), stop:1 rgba(255, 255, 255, 255));}");
     view->setStyleSheet("QHeaderView::section{background-color: qconicalgradient(cx:0, cy:1, angle:348.3, stop:0 rgba(115, 109, 108, 255), stop:1 rgba(255, 255, 255, 255))}");
-        //vastavaribackground-color: qconicalgradient(cx:0, cy:1, angle:348.3, stop:0 rgba(232, 180, 171, 255), stop:1 rgba(255, 255, 255, 255));
-}
+        }
 
 void henkiloTietokanta::createButtons()
 {
@@ -210,6 +212,7 @@ void henkiloTietokanta::revertAll()
             view->showRow(i);
         }
     }
+    rowCountForExcel = 0;
 }
 
 void henkiloTietokanta::createMenu()
@@ -275,6 +278,7 @@ void henkiloTietokanta::removeRow()
             index = indexes.at(j);
             model->removeRow(index.row());
             model->submitAll();
+            
         }
 
     }
@@ -334,6 +338,7 @@ void henkiloTietokanta::search()
                     model->record(i).value(model->record().fieldName(5)) == text)
             {
                 view->showRow(i);
+                rowCountForExcel++;
             }
         }
     }
@@ -421,7 +426,8 @@ void henkiloTietokanta::saveToExcel()
                       << ";" << model->record().fieldName(4)
                       << ";" << model->record().fieldName(5)
                       << endl;
-
+        int apuarvo;
+        model->
         for(int i = 0; i <model->rowCount(); i++)
         {
             output        << model->record(i).value(model->record().fieldName(0)).toInt()
@@ -431,6 +437,7 @@ void henkiloTietokanta::saveToExcel()
                           << ";" << model->record(i).value(model->record().fieldName(4)).toString()
                           << ";" << model->record(i).value(model->record().fieldName(5)).toString()
                           << endl;
+
         }
 
 
@@ -440,7 +447,7 @@ void henkiloTietokanta::saveToExcel()
 
 void henkiloTietokanta::setupWindowIcon(QDialog *windowPtr)
 {
-    QPixmap pixmap(":/resurssit/karsamakivaakuna.jpg");
+    QPixmap pixmap(":/resurssit/karsamaensrklogo.jpg");
     QIcon searchWindowIcon(pixmap);
 
    windowPtr->setWindowIcon(searchWindowIcon);

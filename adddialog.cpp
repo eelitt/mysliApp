@@ -2,6 +2,7 @@
 #include "ui_adddialog.h"
 
 
+
 addDialog::addDialog(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::addDialog)
@@ -26,6 +27,7 @@ void addDialog::setupUi()
     setWindowFlags(windowFlags() & (~Qt::WindowContextHelpButtonHint));
 
 }
+
 
 void addDialog::on_lahetaNappi_clicked()
 {
@@ -52,7 +54,10 @@ void addDialog::on_lahetaNappi_clicked()
             && ui->paikkaLaatikko->isModified())
 
     {
-        emit lahetaHenkilo(strEtu, strSuku, lohkoNum, riviNum, paikkaNum, arkku);
+
+emit lahetaHenkilo(strEtu, strSuku, lohkoNum, riviNum, paikkaNum, arkku);
+
+
 
 
         //empty fields for new entry
@@ -61,13 +66,11 @@ void addDialog::on_lahetaNappi_clicked()
         ui->sukunimiLaatikko->setText("");
         ui->paikkaLaatikko->setText("");
         ui->riviLaatikko->setText("");
-    }
+        ui->etuNimiLaatikko->setFocus();
+}
     else{
         QMessageBox::information(this, tr("Huomio"),tr("Kaikkia tarvittavia tietoja ei annettu laatikoihin."));
     }
-
-
-
 
 
 }
@@ -113,3 +116,9 @@ void addDialog::setupDialogBoxes()
 
 
 }
+
+
+
+
+
+

@@ -22,7 +22,7 @@ background-color: qconicalgradient(cx:0, cy:1, angle:348.3, stop:0 rgba(115, 109
    <property name="geometry">
     <rect>
      <x>40</x>
-     <y>210</y>
+     <y>270</y>
      <width>441</width>
      <height>81</height>
     </rect>
@@ -65,21 +65,6 @@ background-color: qconicalgradient(cx:0, cy:1, angle:348.3, stop:0 rgba(115, 109
     </font>
    </property>
    <layout class="QGridLayout" name="gridLayout">
-    <item row="5" column="1">
-     <widget class="QCheckBox" name="uurnaBox">
-      <property name="font">
-       <font>
-        <family>Verdana</family>
-        <weight>50</weight>
-        <bold>false</bold>
-        <stylestrategy>PreferAntialias</stylestrategy>
-       </font>
-      </property>
-      <property name="text">
-       <string>Uurna</string>
-      </property>
-     </widget>
-    </item>
     <item row="0" column="4">
      <widget class="QLabel" name="counterLaatikko">
       <property name="font">
@@ -255,21 +240,6 @@ border-radius: 4px;
       </property>
      </widget>
     </item>
-    <item row="5" column="0">
-     <widget class="QCheckBox" name="arkkuBox">
-      <property name="font">
-       <font>
-        <family>Verdana</family>
-        <weight>50</weight>
-        <bold>false</bold>
-        <stylestrategy>PreferAntialias</stylestrategy>
-       </font>
-      </property>
-      <property name="text">
-       <string>Arkku</string>
-      </property>
-     </widget>
-    </item>
     <item row="3" column="3">
      <widget class="QPushButton" name="tyhjennaNappi">
       <property name="font">
@@ -291,6 +261,83 @@ border-radius: 4px;
       </property>
      </widget>
     </item>
+    <item row="4" column="1">
+     <widget class="QCheckBox" name="uurnaBox">
+      <property name="font">
+       <font>
+        <family>Verdana</family>
+        <weight>50</weight>
+        <bold>false</bold>
+        <stylestrategy>PreferAntialias</stylestrategy>
+       </font>
+      </property>
+      <property name="text">
+       <string>Uurna</string>
+      </property>
+     </widget>
+    </item>
+    <item row="4" column="0">
+     <widget class="QCheckBox" name="arkkuBox">
+      <property name="font">
+       <font>
+        <family>Verdana</family>
+        <weight>50</weight>
+        <bold>false</bold>
+        <stylestrategy>PreferAntialias</stylestrategy>
+       </font>
+      </property>
+      <property name="text">
+       <string>Arkku</string>
+      </property>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QWidget" name="layoutWidget">
+   <property name="geometry">
+    <rect>
+     <x>100</x>
+     <y>200</y>
+     <width>171</width>
+     <height>37</height>
+    </rect>
+   </property>
+   <layout class="QVBoxLayout" name="verticalLayout">
+    <item>
+     <widget class="QLabel" name="lisatietoLappu">
+      <property name="font">
+       <font>
+        <family>Verdana</family>
+        <weight>50</weight>
+        <bold>false</bold>
+        <stylestrategy>PreferAntialias</stylestrategy>
+       </font>
+      </property>
+      <property name="text">
+       <string>lisätietoa</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QLineEdit" name="lisatietoLaatikko">
+      <property name="font">
+       <font>
+        <family>Verdana</family>
+        <weight>50</weight>
+        <bold>false</bold>
+        <stylestrategy>PreferAntialias</stylestrategy>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QLineEdit {
+border-radius: 4px;
+}</string>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
+    </item>
    </layout>
   </widget>
  </widget>
@@ -300,9 +347,10 @@ border-radius: 4px;
   <tabstop>lohkoLaatikko</tabstop>
   <tabstop>riviLaatikko</tabstop>
   <tabstop>paikkaLaatikko</tabstop>
-  <tabstop>lahetaNappi</tabstop>
-  <tabstop>uurnaBox</tabstop>
   <tabstop>arkkuBox</tabstop>
+  <tabstop>uurnaBox</tabstop>
+  <tabstop>lisatietoLaatikko</tabstop>
+  <tabstop>lahetaNappi</tabstop>
  </tabstops>
  <resources/>
  <connections/>

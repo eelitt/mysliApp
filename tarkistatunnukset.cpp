@@ -25,6 +25,9 @@ void tarkistaTunnukset::setupUi()
 {
     ui->setupUi(this);
     setWindowFlags(windowFlags() & (~Qt::WindowContextHelpButtonHint));
+    QPixmap pixMapIcon(":/resurssit/karsamaensrklogo.jpg");
+    QIcon windowIcon(pixMapIcon);
+    setWindowIcon(windowIcon);
 
 }
 void tarkistaTunnukset::setUsedSqlTableModel(const QString &tablename)
@@ -65,7 +68,9 @@ void tarkistaTunnukset::haeTunnukset(QString &tunnus, QString &salasana)
 
         QSqlRecord record = model->record(j);
 
-        QString password = model->record(j).value(model->record().fieldName(2)).toString();
+        //QString password = model->record(j).value(model->record().fieldName(2)).toString();
+         QString password = model->record(j).value(model->record().fieldName(2)).toString();
+         qDebug() << password;
 
 
         if(salasana == password)
@@ -104,6 +109,8 @@ void tarkistaTunnukset::on_pushButton_clicked()
 
     QString salasana = ui->salasanaLaatikko->text();
 
+    qDebug() << tunnus;
+    qDebug() << model->rowCount();
 
     emit tunnusHaku(tunnus, salasana);
 
